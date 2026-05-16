@@ -10,6 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content="Institutional-grade gold macro intelligence terminal. Bayesian signals, Kelly sizing, real-time regime detection.">
 <title>Gold Quant Terminal · Macro Intelligence</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23fff7d6'/%3E%3Cstop offset='40%25' stop-color='%23ffd87a'/%3E%3Cstop offset='75%25' stop-color='%23f5b338'/%3E%3Cstop offset='100%25' stop-color='%23704a0e'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg stroke='%23f5b338' stroke-width='1.6' stroke-linecap='round' fill='none'%3E%3Cline x1='16' y1='1' x2='16' y2='5'/%3E%3Cline x1='16' y1='27' x2='16' y2='31'/%3E%3Cline x1='1' y1='16' x2='5' y2='16'/%3E%3Cline x1='27' y1='16' x2='31' y2='16'/%3E%3Cline x1='5.6' y1='5.6' x2='8.4' y2='8.4'/%3E%3Cline x1='23.6' y1='23.6' x2='26.4' y2='26.4'/%3E%3Cline x1='26.4' y1='5.6' x2='23.6' y2='8.4'/%3E%3Cline x1='8.4' y1='23.6' x2='5.6' y2='26.4'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='9' fill='url(%23g)' stroke='%23a06e10' stroke-width='.6'/%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -682,6 +683,57 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .pr-note strong{color:var(--text-2);font-weight:500}
 @media(max-width:860px){.portfolio{grid-template-columns:1fr}.port-card{padding:24px}.port-val{font-size:2rem}}
 
+/* ── Capital tracker card ── */
+.capital-card{padding:30px 32px;margin-bottom:18px;position:relative;overflow:hidden}
+.capital-card::before{content:'';position:absolute;top:0;right:0;width:340px;height:340px;background:radial-gradient(circle at top right,var(--gold-soft),transparent 60%);pointer-events:none}
+.cap-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;position:relative}
+.cap-lbl{display:flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;color:var(--gold-2);letter-spacing:.16em;text-transform:uppercase}
+:root[data-theme="light"] .cap-lbl{color:var(--gold)}
+.cap-year{font-family:var(--f-mono);font-size:.66rem;color:var(--text-3);letter-spacing:.06em;padding:4px 10px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:var(--r-pill)}
+.cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px;position:relative}
+.cap-stat{padding-left:14px;border-left:2px solid var(--bdr-2)}
+.cap-stat-lbl{font-size:.56rem;font-weight:600;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.cap-stat-val{font-family:var(--f);font-size:1.6rem;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.025em;line-height:1;margin-bottom:5px}
+.cap-stat-val.gold{color:var(--gold-2)}
+:root[data-theme="light"] .cap-stat-val.gold{color:var(--gold)}
+.cap-stat-val.green{color:var(--green)}
+.cap-stat-sub{font-size:.62rem;color:var(--text-3);line-height:1.5}
+.cap-bar-wrap{margin-bottom:18px;position:relative}
+.cap-bar-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--text-2);font-family:var(--f-mono);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.cap-bar{position:relative;height:10px;border-radius:6px;background:rgba(245,235,214,.03);overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+:root[data-theme="light"] .cap-bar{background:rgba(26,20,16,.06)}
+.cap-bar-fill{height:100%;border-radius:6px;width:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-2));box-shadow:0 0 14px rgba(245,179,56,.45),inset 0 1px 0 rgba(255,255,255,.2);transition:width 1.8s var(--ease);position:relative}
+.cap-bar-fill::after{content:'';position:absolute;top:0;right:-2px;bottom:0;width:30px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));animation:shimmer 2.6s ease-in-out infinite}
+.cap-note{font-size:.7rem;color:var(--text-3);line-height:1.6;padding-top:18px;border-top:1px solid var(--bdr-line);position:relative}
+.cap-note strong{color:var(--gold-2);font-weight:500}
+:root[data-theme="light"] .cap-note strong{color:var(--gold)}
+.cap-note em{color:var(--text-2);font-style:normal;font-weight:500}
+@media(max-width:860px){.capital-card{padding:24px}.cap-grid{grid-template-columns:repeat(2,1fr);gap:14px}.cap-stat-val{font-size:1.3rem}}
+@media(max-width:480px){.cap-grid{grid-template-columns:1fr 1fr}.cap-head{flex-direction:column;align-items:flex-start;gap:10px}}
+
+/* ── News cards ── */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.news-card{
+  display:block;padding:22px 24px;
+  background:linear-gradient(135deg,rgba(245,235,214,.025),rgba(245,235,214,.005)),var(--surface);
+  border:1px solid var(--bdr);border-radius:var(--r-md);
+  transition:all .4s var(--ease);
+  backdrop-filter:blur(12px);position:relative;overflow:hidden;
+  color:var(--text);text-decoration:none;
+}
+:root[data-theme="light"] .news-card{background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.3)),var(--surface)}
+.news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,179,56,.3),transparent)}
+.news-card:hover{border-color:var(--bdr-2);transform:translateY(-2px);box-shadow:0 12px 32px var(--gold-soft)}
+.news-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.news-source{font-size:.56rem;font-weight:700;color:var(--gold-2);letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:5px;font-family:var(--f-mono)}
+:root[data-theme="light"] .news-source{color:var(--gold)}
+.news-time{font-size:.6rem;color:var(--text-3);font-family:var(--f-mono);letter-spacing:.04em}
+.news-title{font-family:var(--f);font-size:.95rem;font-weight:600;color:var(--text);line-height:1.4;letter-spacing:-.01em;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-link{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;color:var(--gold-2);font-weight:500;font-family:var(--f-mono);letter-spacing:.04em;margin-top:4px}
+:root[data-theme="light"] .news-link{color:var(--gold)}
+.news-link::after{content:'→';font-family:var(--f);font-size:.85rem}
+@media(max-width:640px){.news-grid{grid-template-columns:1fr}}
+
 /* ── Reasoning ── */
 .reasoning{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
 .rc{padding:24px 26px;background:linear-gradient(135deg,rgba(245,235,214,.02),transparent),var(--surface);border:1px solid var(--bdr);border-radius:var(--r-md);transition:all .4s var(--ease);backdrop-filter:blur(12px);position:relative;overflow:hidden}
@@ -979,21 +1031,59 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
       <div class="card port-card deploy">
         <div class="port-lbl"><span class="eng-lbl-dot"></span>Recommended Deployment</div>
         <div class="port-val" id="portDeploy">$—</div>
-        <div class="port-val-sub" id="portDeploySub">— · Kelly-sized</div>
-        <p class="port-cta">Of <strong>$500 CAD initial + $50/mo DCA</strong>. Half-Kelly sizing scaled by volatility, regime multiplier, and drawdown bonus.</p>
+        <div class="port-val-sub" id="portDeploySub">— · Kelly-sized · capital-aware</div>
+        <p class="port-cta">Sized against your <strong>available capital</strong> (annual budget minus already-deployed). Half-Kelly with volatility scaling, regime multiplier, and drawdown bonus.</p>
         <div class="port-bar-wrap"><div class="port-bar"><div class="port-bar-fill" id="portBar"></div></div></div>
-        <div class="port-stats"><span>$0</span><span>$25</span><span>$50 monthly cap</span></div>
+        <div class="port-stats"><span>$0</span><span id="portStatMid">$25</span><span id="portStatMax">$50 monthly cap</span></div>
       </div>
       <div class="card port-card port-return">
-        <div class="port-lbl"><span class="eng-lbl-dot"></span>Returns &amp; Reserves</div>
+        <div class="port-lbl"><span class="eng-lbl-dot"></span>Risk &amp; Returns</div>
         <div class="pr-mini-grid">
           <div><div class="pr-mini-lbl">Expected Return</div><div class="pr-mini-val green" id="prRet">—</div></div>
-          <div><div class="pr-mini-lbl">Cash Reserve</div><div class="pr-mini-val gold" id="prRes">—</div></div>
           <div><div class="pr-mini-lbl">30d Vol</div><div class="pr-mini-val" id="prVol">—</div></div>
           <div><div class="pr-mini-lbl">Drawdown 1Y</div><div class="pr-mini-val" id="prDD">—</div></div>
+          <div><div class="pr-mini-lbl">RSI</div><div class="pr-mini-val gold" id="prRsi">—</div></div>
         </div>
-        <div class="pr-note">Half-Kelly with volatility scaling and drawdown bonus. ETFs: <strong>CGL.C</strong> (CAD monthly DCA) + <strong>ZGLD.U</strong> (USD lump on dips). Both TFSA-eligible on TSX.</div>
+        <div class="pr-note">Half-Kelly with volatility scaling and drawdown bonus. ETFs: <strong>CGL.C</strong> (CAD DCA) + <strong>ZGLD.U</strong> (USD lump on dips). Both TFSA-eligible on TSX.</div>
       </div>
+    </div>
+
+    <!-- Capital tracker -->
+    <div class="capital-card card fi d7">
+      <div class="cap-head">
+        <div class="cap-lbl"><span class="eng-lbl-dot"></span>Annual Capital Allocation</div>
+        <div class="cap-year" id="capYear">2026 Budget</div>
+      </div>
+      <div class="cap-grid">
+        <div class="cap-stat">
+          <div class="cap-stat-lbl">Total Annual Budget</div>
+          <div class="cap-stat-val" id="capBudget">$—</div>
+          <div class="cap-stat-sub">Maximum capital for the year</div>
+        </div>
+        <div class="cap-stat">
+          <div class="cap-stat-lbl">Deployed to CGL.C</div>
+          <div class="cap-stat-val gold" id="capCGL">$—</div>
+          <div class="cap-stat-sub">CAD DCA on TSX</div>
+        </div>
+        <div class="cap-stat">
+          <div class="cap-stat-lbl">Deployed to ZGLD.U</div>
+          <div class="cap-stat-val gold" id="capZGLD">$—</div>
+          <div class="cap-stat-sub">USD lump on dips</div>
+        </div>
+        <div class="cap-stat">
+          <div class="cap-stat-lbl">Available Capital</div>
+          <div class="cap-stat-val green" id="capAvail">$—</div>
+          <div class="cap-stat-sub" id="capAvailSub">— left to deploy</div>
+        </div>
+      </div>
+      <div class="cap-bar-wrap">
+        <div class="cap-bar-lbl">
+          <span>Deployed <span id="capDeployedPct" style="color:var(--gold-2)">—%</span></span>
+          <span id="capDeployedTotal">$— / $—</span>
+        </div>
+        <div class="cap-bar"><div class="cap-bar-fill" id="capBar"></div></div>
+      </div>
+      <div class="cap-note">Update <strong>Portfolio sheet B3 / B4</strong> in Google Sheets after each buy. The engine recalculates Kelly sizing against your <em>remaining</em> capital — recommendations shrink as you deploy.</div>
     </div>
 
     <section class="sec fi d8">
@@ -1010,8 +1100,17 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
       <div class="rc"><div class="rc-head"><div class="rc-ico"><svg><use href="#i-shield"/></svg></div><div class="rc-title">Risk Framework</div></div><div class="rc-body" id="rRis">Loading reasoning…</div></div>
     </div>
 
-    <section class="sec fi d8">
+    <!-- NEWS SECTION -->
+    <section class="sec fi d8" id="newsSec" style="display:none">
       <span class="sec-num">06</span>
+      <h2 class="sec-title">Gold News</h2>
+      <div class="sec-line"></div>
+      <span class="sec-tag">Top Stories · Live RSS</span>
+    </section>
+    <div class="news-grid fi d8" id="newsGrid" style="display:none"></div>
+
+    <section class="sec fi d8">
+      <span class="sec-num" id="chartSecNum">07</span>
       <h2 class="sec-title">Price History</h2>
       <div class="sec-line"></div>
       <span class="sec-tag">30-Day Trail</span>
@@ -1053,10 +1152,10 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 (() => {
 'use strict';
 
-const API = 'https://script.google.com/macros/s/AKfycbywb5ffliYN4Ajvul8cOeQACyNhqWwGSlD-eIzzpVKG4ul4tjtkIAx2wJAgy4zVZ47UFg/exec';
-const CACHE_KEY = 'gqt:v5:lastData';
-const CACHE_TS_KEY = 'gqt:v5:lastTs';
-const THEME_KEY = 'gqt:v5:theme';
+const API = 'https://script.google.com/macros/s/AKfycbzxdyCkxK7t-4MZ0tfzRwifas7WpdKjSGx-G4GqeP49nTNHagVZoQVNxoGhWMA7ea3jVQ/exec';
+const CACHE_KEY = 'gqt:v6:lastData';
+const CACHE_TS_KEY = 'gqt:v6:lastTs';
+const THEME_KEY = 'gqt:v6:theme';
 const REFRESH_MS = 5 * 60 * 1000;
 const STALE_MS = 10 * 60 * 1000;
 const TIMEOUT_MS = 55000;
@@ -1121,7 +1220,7 @@ function toast(msg, type) {
 function setStatus(mode, label) {
   const p = $('statusPill'); if (!p) return;
   p.classList.remove('stale', 'err', 'fetching');
-  if (mode) p.classList.add(mode === 'live' ? '' : mode);
+  if (mode && mode !== 'live') p.classList.add(mode);
   setText('statusLabel', label || (mode === 'err' ? 'Offline' : mode === 'stale' ? 'Stale' : mode === 'fetching' ? 'Loading' : 'Live'));
 }
 
@@ -1241,6 +1340,50 @@ function renderTicker(d) {
   }
 }
 
+/* ── News ── */
+function timeAgo(isoStr) {
+  if (!isoStr) return '';
+  try {
+    const then = new Date(isoStr).getTime();
+    if (!isFinite(then)) return '';
+    const diff = Date.now() - then;
+    const m = Math.floor(diff / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + 'm ago';
+    const h = Math.floor(m / 60);
+    if (h < 24) return h + 'h ago';
+    const d = Math.floor(h / 24);
+    return d + 'd ago';
+  } catch (e) { return ''; }
+}
+function renderNews(news) {
+  const sec = $('newsSec'), grid = $('newsGrid');
+  if (!sec || !grid) return;
+  if (!news || !news.length) {
+    sec.style.display = 'none';
+    grid.style.display = 'none';
+    return;
+  }
+  sec.style.display = '';
+  grid.style.display = '';
+  while (grid.firstChild) grid.removeChild(grid.firstChild);
+  news.slice(0, 4).forEach(n => {
+    const a = document.createElement('a');
+    a.className = 'news-card';
+    a.href = n.url || '#';
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    const head = document.createElement('div'); head.className = 'news-head';
+    const src = document.createElement('span'); src.className = 'news-source'; src.textContent = (n.source || 'News').slice(0, 16);
+    const time = document.createElement('span'); time.className = 'news-time'; time.textContent = timeAgo(n.pubDate) || '';
+    head.appendChild(src); if (time.textContent) head.appendChild(time);
+    const title = document.createElement('h3'); title.className = 'news-title'; title.textContent = n.title || '';
+    const link = document.createElement('span'); link.className = 'news-link'; link.textContent = 'Read';
+    a.appendChild(head); a.appendChild(title); a.appendChild(link);
+    grid.appendChild(a);
+  });
+}
+
 /* ── Render (strict — never renders bad data) ── */
 function render(d, opts) {
   opts = opts || {};
@@ -1347,21 +1490,49 @@ function render(d, opts) {
   setText('regMult', ri.mult);
   setText('regDesc', ri.desc);
 
-  const dep = d.deployCAD || 0, res = d.reserve || 500;
+  const dep = d.deployCAD || 0;
   const ret = d.expReturn || 0, dd = d.drawdown || 0;
-  setText('portDeploy', '$' + dep + ' CAD');
-  setText('portDeploySub', ((dep / 50) * 100).toFixed(0) + '% of monthly DCA · Kelly-sized');
-  setBar('portBar', Math.min((dep / 50) * 100, 100));
+  const rsiVal = d.rsi || 50;
+  const budget    = d.budget    != null ? d.budget    : 2000;
+  const deployedCGL  = d.deployedCGL  != null ? d.deployedCGL  : 0;
+  const deployedZGLD = d.deployedZGLD != null ? d.deployedZGLD : 0;
+  const deployedTotal = deployedCGL + deployedZGLD;
+  const available   = Math.max(0, budget - deployedTotal);
+  const monthlyCap  = d.monthlyCap != null ? d.monthlyCap : 50;
+
+  setText('portDeploy', '$' + Math.round(dep) + ' CAD');
+  setText('portDeploySub', (monthlyCap > 0 ? ((dep / monthlyCap) * 100).toFixed(0) + '% of monthly DCA · ' : '') + 'Kelly-sized · capital-aware');
+  setBar('portBar', monthlyCap > 0 ? Math.min((dep / monthlyCap) * 100, 100) : 0);
+  setText('portStatMid', '$' + Math.round(monthlyCap / 2));
+  setText('portStatMax', '$' + monthlyCap + ' monthly cap');
   setText('prRet', (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%');
-  setText('prRes', '$' + res);
   setText('prVol', vol.toFixed(1) + '%');
   setText('prDD', dd.toFixed(1) + '%');
+  setText('prRsi', rsiVal.toFixed(1));
 
-  const rsi = d.rsi || 50, zs = d.zScore || 0;
+  // Capital tracker
+  setText('capBudget', '$' + budget.toLocaleString('en-CA'));
+  setText('capCGL', '$' + deployedCGL.toLocaleString('en-CA'));
+  setText('capZGLD', '$' + deployedZGLD.toLocaleString('en-CA'));
+  setText('capAvail', '$' + available.toLocaleString('en-CA'));
+  setText('capAvailSub', ((available / budget) * 100).toFixed(0) + '% of budget unused');
+  const pctDep = budget > 0 ? (deployedTotal / budget) * 100 : 0;
+  setText('capDeployedPct', pctDep.toFixed(1) + '%');
+  setText('capDeployedTotal', '$' + deployedTotal.toLocaleString('en-CA') + ' / $' + budget.toLocaleString('en-CA'));
+  setBar('capBar', pctDep);
+  try {
+    const yr = new Date().getFullYear();
+    setText('capYear', yr + ' Budget');
+  } catch (e) {}
+
+  // News
+  renderNews(d.news);
+
+  const zs = d.zScore || 0;
   setText('rSig', 'Entry probability ' + prob.toFixed(1) + '% via Bayesian sigmoid on a ' + cs.toFixed(1) + '% composite score. ' + (prob >= 65 ? 'All systems aligned — aggressive entry warranted.' : prob >= 50 ? 'Standard BUY conditions met — deploy full DCA.' : prob >= 35 ? 'Mixed signals — DCA only, no lump-sum additions.' : 'Patience rewarded here. Hold cash and wait for better entry.'));
   setText('rMac', 'Regime: ' + reg.replace(/_/g,' ') + '. Real yield ' + ry.toFixed(2) + '% ' + (ry < 0 ? '(gold-bullish)' : '(headwind)') + '. CPI ' + cpi.toFixed(1) + '% YoY. DXY ' + dxy.toFixed(1) + '. VIX ' + vix.toFixed(1) + '.');
-  setText('rTec', 'RSI ' + rsi.toFixed(1) + ' ' + (rsi < 40 ? '(oversold — buy zone)' : rsi > 70 ? '(overbought — caution)' : '(neutral)') + '. Price Z-score vs 90-day: ' + zs.toFixed(2) + 'σ. ' + (Math.abs(zs) > 2 ? 'Significant deviation — mean reversion likely.' : 'Price near historical average.'));
-  setText('rRis', 'Half-Kelly sizing with vol scaling. 30-day vol: ' + vol.toFixed(1) + '%. Expected return: ' + (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%. Reserve: $' + res + ' USD maintained. CGL.C (CAD DCA) + ZGLD.U (USD lump on dips).');
+  setText('rTec', 'RSI ' + rsiVal.toFixed(1) + ' ' + (rsiVal < 40 ? '(oversold — buy zone)' : rsiVal > 70 ? '(overbought — caution)' : '(neutral)') + '. Price Z-score vs 90-day: ' + zs.toFixed(2) + 'σ. ' + (Math.abs(zs) > 2 ? 'Significant deviation — mean reversion likely.' : 'Price near historical average.'));
+  setText('rRis', 'Half-Kelly with vol scaling against $' + available.toLocaleString('en-CA') + ' CAD available (of $' + budget + ' annual budget). 30-day vol: ' + vol.toFixed(1) + '%. Expected return: ' + (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%. CGL.C (CAD DCA) + ZGLD.U (USD lump on dips).');
 
   if (d.history && d.history.length) {
     const prices = d.history.map(h => parseFloat(h.price) || 0).filter(p => p > 0);
