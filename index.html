@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
@@ -14,15 +14,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://script.google.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <style>
 /* ════════════════════════════════════════════════════
-   GOLD QUANT TERMINAL — Design System v4
-   Inspired by premium fintech UI references
+   GOLD QUANT TERMINAL — Design System v5
+   Dark + Light themes · Warm cream palette
    ════════════════════════════════════════════════════ */
-:root{
-  /* WARM black surfaces */
+
+/* DARK THEME (default) */
+:root, :root[data-theme="dark"]{
   --bg:#0a0a0c;
   --bg-elev:#111114;
   --surface:#15151a;
@@ -30,14 +31,16 @@
   --surface-3:#23232c;
   --surface-hover:#2a2a34;
 
-  /* WARM cream text — the premium signature */
   --text:#f5ebd6;
   --text-2:#a8a195;
   --text-3:#6e685e;
   --text-4:#44403a;
-  --text-dim:rgba(245,235,214,.10);
 
-  /* Warm amber-gold spectrum */
+  --bdr:rgba(245,235,214,.05);
+  --bdr-2:rgba(245,179,56,.16);
+  --bdr-3:rgba(245,179,56,.36);
+  --bdr-line:rgba(245,235,214,.04);
+
   --gold:#f5b338;
   --gold-2:#ffd87a;
   --gold-3:#ffe9b3;
@@ -48,79 +51,108 @@
   --gold-soft:rgba(245,179,56,.10);
   --gold-faint:rgba(245,179,56,.04);
 
-  /* Borders — almost invisible, premium restraint */
-  --bdr:rgba(245,235,214,.05);
-  --bdr-2:rgba(245,179,56,.16);
-  --bdr-3:rgba(245,179,56,.36);
-  --bdr-line:rgba(245,235,214,.04);
-
-  /* Status — warm-tuned */
   --green:#4ade80;
-  --green-deep:#16a34a;
   --green-soft:rgba(74,222,128,.10);
   --red:#f87171;
   --red-soft:rgba(248,113,113,.10);
   --blue:#60a5fa;
   --blue-soft:rgba(96,165,250,.10);
 
-  /* Radii — softer, more luxurious */
-  --r-xs:8px;
-  --r-sm:12px;
-  --r-md:18px;
-  --r-lg:24px;
-  --r-xl:32px;
-  --r-pill:999px;
+  --amb-1:rgba(245,179,56,.12);
+  --amb-2:rgba(201,138,26,.08);
+  --amb-3:rgba(255,216,122,.05);
+  --grid-line:rgba(245,179,56,.018);
+  --particle-base:rgba(245,179,56,.18);
+  --chart-grid:rgba(245,235,214,.025);
+  --chart-tick:rgba(168,161,149,.6);
+}
 
-  /* Shadows — soft, warm */
+/* LIGHT THEME — Warm parchment, daytime banker */
+:root[data-theme="light"]{
+  --bg:#faf6ed;
+  --bg-elev:#f3ede0;
+  --surface:#fffbf2;
+  --surface-2:#f8f1e2;
+  --surface-3:#f0e7d4;
+  --surface-hover:#e8dec8;
+
+  --text:#1a1410;
+  --text-2:#5e564c;
+  --text-3:#8a8278;
+  --text-4:#b8b0a4;
+
+  --bdr:rgba(26,20,16,.06);
+  --bdr-2:rgba(201,138,26,.32);
+  --bdr-3:rgba(201,138,26,.48);
+  --bdr-line:rgba(26,20,16,.04);
+
+  --gold:#c98a1a;
+  --gold-2:#a06e10;
+  --gold-3:#8a5e0c;
+  --gold-4:#6a4608;
+  --gold-deep:#5a3a06;
+  --gold-bronze:#3a2604;
+  --gold-glow:rgba(201,138,26,.18);
+  --gold-soft:rgba(201,138,26,.10);
+  --gold-faint:rgba(201,138,26,.04);
+
+  --green:#16a34a;
+  --green-soft:rgba(22,163,74,.10);
+  --red:#dc2626;
+  --red-soft:rgba(220,38,38,.10);
+  --blue:#2563eb;
+
+  --amb-1:rgba(245,179,56,.20);
+  --amb-2:rgba(201,138,26,.10);
+  --amb-3:rgba(255,216,122,.18);
+  --grid-line:rgba(201,138,26,.03);
+  --particle-base:rgba(201,138,26,.18);
+  --chart-grid:rgba(26,20,16,.05);
+  --chart-tick:rgba(94,86,76,.7);
+}
+
+:root{
+  --r-xs:8px; --r-sm:12px; --r-md:18px; --r-lg:24px; --r-xl:32px; --r-pill:999px;
   --sh-1:0 1px 0 rgba(255,255,255,.04) inset;
   --sh-2:0 8px 32px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.04) inset;
   --sh-3:0 16px 48px rgba(0,0,0,.5),0 0 0 1px rgba(245,179,56,.08) inset;
-  --sh-glow:0 0 48px rgba(245,179,56,.18);
-  --sh-glow-strong:0 0 80px rgba(245,179,56,.28);
-
-  /* Fonts */
   --f:'Outfit',sans-serif;
   --f-body:'Inter',sans-serif;
   --f-mono:'JetBrains Mono',monospace;
-  --f-serif:'Instrument Serif',serif;
-
-  /* Easing — premium curves */
   --ease:cubic-bezier(.22,1,.36,1);
   --ease-soft:cubic-bezier(.4,0,.2,1);
-  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+:root[data-theme="light"]{
+  --sh-2:0 8px 32px rgba(60,40,10,.10),0 1px 0 rgba(255,255,255,.6) inset;
+  --sh-3:0 16px 48px rgba(60,40,10,.14),0 0 0 1px rgba(201,138,26,.10) inset;
 }
 
-/* ════════════════════════════════════════════════════
-   RESET + BASE
-   ════════════════════════════════════════════════════ */
+/* ── Reset ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   font-family:var(--f-body);
-  background:var(--bg);
-  color:var(--text);
+  background:var(--bg);color:var(--text);
   min-height:100vh;min-height:100dvh;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   font-feature-settings:'cv11','ss01','ss03','tnum';
-  line-height:1.55;
-  letter-spacing:-.005em;
+  line-height:1.55;letter-spacing:-.005em;
   position:relative;
+  transition:background-color .5s var(--ease),color .3s var(--ease);
 }
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;outline:none}
 svg{display:block}
 a{color:inherit;text-decoration:none}
 
-/* ════════════════════════════════════════════════════
-   AMBIENT BACKGROUND — Cinematic depth
-   ════════════════════════════════════════════════════ */
+/* ── Ambient ── */
 .amb{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .amb-grad{
   position:absolute;inset:-30%;
   background:
-    radial-gradient(ellipse 65% 50% at 88% 5%,rgba(245,179,56,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 50% 50% at 5% 95%,rgba(201,138,26,.08) 0%,transparent 60%),
-    radial-gradient(ellipse 80% 35% at 50% -10%,rgba(255,216,122,.05) 0%,transparent 60%);
+    radial-gradient(ellipse 65% 50% at 88% 5%,var(--amb-1) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 5% 95%,var(--amb-2) 0%,transparent 60%),
+    radial-gradient(ellipse 80% 35% at 50% -10%,var(--amb-3) 0%,transparent 60%);
   animation:ambDrift 32s ease-in-out infinite alternate;
   filter:blur(10px);
 }
@@ -132,8 +164,8 @@ a{color:inherit;text-decoration:none}
 .amb-grid{
   position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(245,179,56,.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(245,179,56,.018) 1px,transparent 1px);
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
   background-size:80px 80px;
   mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,#000 25%,transparent 85%);
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,#000 25%,transparent 85%);
@@ -144,39 +176,32 @@ a{color:inherit;text-decoration:none}
 }
 canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5}
 
-/* Cursor glow follower (desktop only) */
 .cursor{
   position:fixed;width:480px;height:480px;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,179,56,.08),transparent 60%);
+  background:radial-gradient(circle,var(--gold-soft),transparent 60%);
   pointer-events:none;z-index:1;
   transform:translate(-50%,-50%);
-  transition:opacity .4s;
-  mix-blend-mode:screen;
-  will-change:transform;
+  mix-blend-mode:screen;will-change:transform;
 }
+:root[data-theme="light"] .cursor{mix-blend-mode:multiply;opacity:.6}
 @media(hover:none),(max-width:900px){.cursor{display:none}}
 
-/* ════════════════════════════════════════════════════
-   LAYOUT
-   ════════════════════════════════════════════════════ */
+/* ── Layout ── */
 .wrap{position:relative;z-index:2}
 .container{max-width:1280px;margin:0 auto;padding:0 32px}
 @media(max-width:640px){.container{padding:0 18px}}
 
-/* ════════════════════════════════════════════════════
-   HEADER — Floating glass nav
-   ════════════════════════════════════════════════════ */
+/* ── Header ── */
 .hdr{
   position:sticky;top:0;z-index:60;
   backdrop-filter:saturate(160%) blur(28px);
   -webkit-backdrop-filter:saturate(160%) blur(28px);
   background:rgba(10,10,12,.72);
   border-bottom:1px solid var(--bdr-line);
+  transition:background .5s var(--ease);
 }
-.hdr-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 0;gap:16px;
-}
+:root[data-theme="light"] .hdr{background:rgba(250,246,237,.78)}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px}
 .brand{display:flex;align-items:center;gap:14px}
 .brand-mark{
   width:42px;height:42px;position:relative;flex-shrink:0;
@@ -185,18 +210,41 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
     radial-gradient(circle at 30% 30%,rgba(255,216,122,.35),rgba(245,179,56,.10) 60%,transparent),
     linear-gradient(135deg,rgba(245,179,56,.15),rgba(201,138,26,.05));
   border-radius:12px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,235,180,.20),
-    inset 0 -1px 0 rgba(0,0,0,.4),
-    0 0 24px rgba(245,179,56,.18);
+  box-shadow:inset 0 1px 0 rgba(255,235,180,.20),inset 0 -1px 0 rgba(0,0,0,.4),0 0 24px rgba(245,179,56,.18);
 }
-.brand-mark svg{width:24px;height:24px;animation:slowSpin 28s linear infinite}
+.brand-mark svg{width:24px;height:24px;animation:slowSpin 28s linear infinite;color:var(--gold-2)}
+:root[data-theme="light"] .brand-mark svg{color:var(--gold)}
 @keyframes slowSpin{to{transform:rotate(360deg)}}
 .brand-txt{display:flex;flex-direction:column;line-height:1.05}
 .brand-name{font-family:var(--f);font-weight:600;font-size:1rem;letter-spacing:-.015em;color:var(--text)}
 .brand-sub{font-size:.6rem;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-top:3px}
 
-.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+
+/* Theme toggle */
+.theme-toggle{
+  display:flex;align-items:center;
+  background:var(--surface-2);
+  border:1px solid var(--bdr);
+  border-radius:var(--r-pill);
+  padding:4px;gap:2px;
+  transition:all .3s var(--ease);
+}
+.theme-btn{
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--text-3);
+  transition:all .3s var(--ease);
+}
+.theme-btn:hover{color:var(--text)}
+.theme-btn.active{
+  background:radial-gradient(circle at 30% 30%,var(--gold-3),var(--gold) 60%,var(--gold-deep));
+  color:#1a1410;
+  box-shadow:0 0 12px var(--gold-glow);
+}
+:root[data-theme="light"] .theme-btn.active{color:#fffbf2}
+.theme-btn svg{width:14px;height:14px}
+
 .status-pill{
   display:flex;align-items:center;gap:8px;
   padding:7px 14px;
@@ -206,64 +254,49 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
   font-size:.66rem;font-weight:600;color:var(--green);
   letter-spacing:.10em;text-transform:uppercase;
   transition:all .3s var(--ease);
+  cursor:pointer;
 }
+.status-pill:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.2)}
 .status-pill.stale{background:var(--gold-soft);border-color:var(--bdr-2);color:var(--gold-2)}
+:root[data-theme="light"] .status-pill.stale{color:var(--gold)}
 .status-pill.err{background:var(--red-soft);border-color:rgba(248,113,113,.22);color:var(--red)}
-.status-dot{
-  width:7px;height:7px;border-radius:50%;background:var(--green);
-  box-shadow:0 0 8px currentColor;animation:livePulse 2.2s ease-in-out infinite;
-}
-.status-pill.stale .status-dot{background:var(--gold-2)}
-.status-pill.err .status-dot{background:var(--red);animation:none}
-@keyframes livePulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.5;transform:scale(1.4)}
-}
+.status-pill.fetching{background:var(--blue-soft);border-color:rgba(96,165,250,.22);color:var(--blue)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;animation:livePulse 2.2s ease-in-out infinite}
+.status-pill.err .status-dot{animation:none}
+.status-pill.fetching .status-dot{animation:fetchSpin .8s linear infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes fetchSpin{to{transform:rotate(360deg)}}
 .upd-meta{font-size:.64rem;color:var(--text-3);font-family:var(--f-mono);letter-spacing:.04em}
 @media(max-width:640px){.upd-meta{display:none}.brand-sub{display:none}.brand-mark{width:36px;height:36px}}
 
-/* ════════════════════════════════════════════════════
-   TICKER TAPE — Bloomberg-style live strip
-   ════════════════════════════════════════════════════ */
+/* ── Ticker tape ── */
 .ticker{
   border-bottom:1px solid var(--bdr-line);
-  background:linear-gradient(180deg,rgba(245,179,56,.02),transparent);
-  overflow:hidden;
-  position:relative;
-  height:36px;
+  background:linear-gradient(180deg,var(--gold-faint),transparent);
+  overflow:hidden;position:relative;height:36px;
 }
-.ticker::before,.ticker::after{
-  content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
-}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
 .ticker::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
 .ticker::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
 .ticker-track{
   display:flex;gap:48px;align-items:center;height:100%;
   animation:tickerScroll 60s linear infinite;
-  white-space:nowrap;padding-left:0;
-  will-change:transform;
+  white-space:nowrap;will-change:transform;
 }
 .ticker:hover .ticker-track{animation-play-state:paused}
-@keyframes tickerScroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tk-item{display:flex;align-items:center;gap:8px;font-size:.72rem;font-family:var(--f-mono);font-weight:500;flex-shrink:0}
 .tk-lbl{color:var(--text-3);text-transform:uppercase;letter-spacing:.10em;font-size:.62rem;font-weight:600}
 .tk-val{color:var(--text);font-variant-numeric:tabular-nums}
 .tk-chg{font-size:.66rem;font-variant-numeric:tabular-nums}
-.tk-chg.up{color:var(--green)}
-.tk-chg.dn{color:var(--red)}
-.tk-chg.flat{color:var(--text-3)}
+.tk-chg.up{color:var(--green)}.tk-chg.dn{color:var(--red)}.tk-chg.flat{color:var(--text-3)}
 .tk-dot{width:4px;height:4px;border-radius:50%;background:var(--text-4)}
 
-/* ════════════════════════════════════════════════════
-   HERO — Cinematic price reveal with gold orb
-   ════════════════════════════════════════════════════ */
+/* ── Hero ── */
 .hero{
   position:relative;padding:80px 0 48px;
   display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;
-  min-height:520px;
+  min-height:560px;
 }
 .hero-l{position:relative;z-index:3;min-width:0}
 .hero-r{position:relative;z-index:2}
@@ -271,30 +304,22 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   font-size:.66rem;font-weight:600;
-  letter-spacing:.20em;text-transform:uppercase;
-  color:var(--gold-2);
+  letter-spacing:.20em;text-transform:uppercase;color:var(--gold-2);
   padding:8px 16px;
-  background:linear-gradient(135deg,rgba(245,179,56,.10),rgba(245,179,56,.02));
-  border:1px solid var(--bdr-2);
-  border-radius:var(--r-pill);
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold-faint));
+  border:1px solid var(--bdr-2);border-radius:var(--r-pill);
   margin-bottom:28px;
   text-shadow:0 0 16px rgba(245,179,56,.4);
   backdrop-filter:blur(8px);
 }
-.hero-eyebrow .ico{width:11px;height:11px;color:var(--gold-2)}
-.hero-eyebrow .live-d{
-  width:5px;height:5px;border-radius:50%;background:var(--green);
-  box-shadow:0 0 8px var(--green);animation:livePulse 1.8s ease-in-out infinite;
-}
+:root[data-theme="light"] .hero-eyebrow{color:var(--gold);text-shadow:none}
+.hero-eyebrow .live-d{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:livePulse 1.8s ease-in-out infinite}
 
 .hero-price{
   font-family:var(--f);
   font-size:clamp(3.6rem,11vw,7.4rem);
-  font-weight:600;
-  letter-spacing:-.055em;
-  line-height:.92;
-  margin-bottom:14px;
-  color:var(--text);
+  font-weight:600;letter-spacing:-.055em;line-height:.92;
+  margin-bottom:14px;color:var(--text);
   font-variant-numeric:tabular-nums;
   display:flex;align-items:baseline;gap:8px;
   text-shadow:0 0 60px rgba(245,235,214,.10);
@@ -302,85 +327,70 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .hero-price .cur{font-size:.45em;color:var(--text-2);font-weight:400;letter-spacing:0}
 .hero-price .int{
   background:linear-gradient(180deg,var(--gold-4) 0%,var(--gold-2) 30%,var(--gold) 65%,var(--gold-deep) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 40px rgba(245,179,56,.30));
 }
-.hero-price .dec{color:var(--text-2);font-weight:500;font-size:.55em}
-
-.hero-sub{
-  font-size:.78rem;color:var(--text-3);
-  font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:10px;
+:root[data-theme="light"] .hero-price .int{
+  background:linear-gradient(180deg,var(--gold) 0%,var(--gold-2) 30%,var(--gold-3) 60%,var(--gold-4) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 24px rgba(201,138,26,.20));
 }
+.hero-price .dec{color:var(--text-2);font-weight:500;font-size:.55em}
+.hero-price.loading .int,.hero-price.loading .dec{
+  background:none;-webkit-text-fill-color:var(--text-3);color:var(--text-3);
+  filter:none;
+}
+
+.hero-sub{font-size:.78rem;color:var(--text-3);font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
 .hero-delta{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:.82rem;font-weight:500;
-  margin-bottom:36px;
+  font-size:.82rem;font-weight:500;margin-bottom:36px;
   font-family:var(--f-mono);
   padding:6px 12px;border-radius:var(--r-pill);
-  background:rgba(255,255,255,.025);border:1px solid var(--bdr-line);
+  background:rgba(245,235,214,.025);border:1px solid var(--bdr-line);
 }
+:root[data-theme="light"] .hero-delta{background:rgba(26,20,16,.03)}
 .hero-delta.up{color:var(--green);background:var(--green-soft);border-color:rgba(74,222,128,.20)}
 .hero-delta.dn{color:var(--red);background:var(--red-soft);border-color:rgba(248,113,113,.20)}
 .hero-delta.flat{color:var(--text-3)}
+.hero-delta.hidden{visibility:hidden}
 .hero-delta .ar{font-size:.7rem}
 
 .hero-strip{
-  display:inline-flex;flex-wrap:wrap;
-  padding:5px;
+  display:inline-flex;flex-wrap:wrap;padding:5px;
   background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-  border:1px solid var(--bdr-line);
-  border-radius:var(--r-pill);
+  border:1px solid var(--bdr-line);border-radius:var(--r-pill);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   box-shadow:var(--sh-2);
 }
-.hs-item{
-  padding:11px 22px;text-align:left;position:relative;
-  border-radius:var(--r-pill);transition:background .3s var(--ease);
-}
-.hs-item:hover{background:rgba(245,179,56,.05)}
-.hs-item+.hs-item::before{
-  content:'';position:absolute;left:0;top:25%;bottom:25%;
-  width:1px;background:var(--bdr-line);
-}
-.hs-lbl{
-  font-size:.56rem;font-weight:600;
-  letter-spacing:.16em;text-transform:uppercase;
-  color:var(--text-3);margin-bottom:5px;
-}
-.hs-val{
-  font-family:var(--f);font-size:1.15rem;font-weight:600;
-  letter-spacing:-.015em;color:var(--text);
-  font-variant-numeric:tabular-nums;line-height:1;
-}
+:root[data-theme="light"] .hero-strip{background:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.2))}
+.hs-item{padding:11px 22px;text-align:left;position:relative;border-radius:var(--r-pill);transition:background .3s var(--ease)}
+.hs-item:hover{background:var(--gold-faint)}
+.hs-item+.hs-item::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:1px;background:var(--bdr-line)}
+.hs-lbl{font-size:.56rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
+.hs-val{font-family:var(--f);font-size:1.15rem;font-weight:600;letter-spacing:-.015em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
 .hs-val.gold{color:var(--gold-2);text-shadow:0 0 14px rgba(245,179,56,.4)}
+:root[data-theme="light"] .hs-val.gold{color:var(--gold);text-shadow:none}
 .hs-val.green{color:var(--green);text-shadow:0 0 14px rgba(74,222,128,.3)}
 .hs-val.red{color:var(--red)}
 .hs-val.muted{color:var(--text-2);font-size:.95rem;font-weight:500}
 
-/* Gold orb — cinematic hero element */
-.orb{
-  width:340px;height:340px;position:relative;
+/* ── Gold sphere + orbiting coins ── */
+.orb-system{
+  width:380px;height:380px;position:relative;
   display:grid;place-items:center;
   animation:orbFloat 6s ease-in-out infinite;
 }
-@keyframes orbFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
+@keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .orb-glow{
-  position:absolute;inset:-40px;
-  background:radial-gradient(circle,rgba(245,179,56,.30),transparent 65%);
+  position:absolute;inset:60px;
+  background:radial-gradient(circle,rgba(245,179,56,.32),transparent 65%);
   border-radius:50%;animation:orbGlow 4s ease-in-out infinite alternate;
   filter:blur(20px);
 }
-@keyframes orbGlow{
-  0%{opacity:.7;transform:scale(1)}
-  100%{opacity:1;transform:scale(1.1)}
-}
+@keyframes orbGlow{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.12)}}
 .orb-sphere{
-  width:240px;height:240px;border-radius:50%;position:relative;
+  width:220px;height:220px;border-radius:50%;position:relative;
   background:
     radial-gradient(circle at 30% 25%,rgba(255,250,230,.95) 0%,rgba(255,216,122,.90) 18%,rgba(245,179,56,.85) 45%,rgba(201,138,26,.75) 75%,rgba(110,75,20,.95) 100%);
   box-shadow:
@@ -389,6 +399,7 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
     inset 0 0 80px rgba(245,179,56,.4),
     0 30px 80px rgba(245,179,56,.4),
     0 0 60px rgba(255,216,122,.30);
+  z-index:2;
 }
 .orb-sphere::before{
   content:'';position:absolute;top:20%;left:25%;width:35%;height:25%;
@@ -400,467 +411,292 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
   background:radial-gradient(ellipse,rgba(255,216,122,.4),transparent 70%);
   border-radius:50%;filter:blur(12px);
 }
-.orb-burst{
-  position:absolute;inset:-30px;animation:slowSpin 80s linear infinite;
-  opacity:.4;
+
+/* Coin orbits */
+.orbit{
+  position:absolute;inset:0;
+  border:1px dashed rgba(245,179,56,.08);border-radius:50%;
+  animation:orbitSpin linear infinite;
 }
+.orbit.r1{animation-duration:32s;inset:30px}
+.orbit.r2{animation-duration:48s;animation-direction:reverse;inset:0}
+.orbit.r3{animation-duration:64s;inset:-30px;border-color:rgba(245,179,56,.05)}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+
+.coin{
+  position:absolute;
+  width:42px;height:42px;border-radius:50%;
+  top:50%;left:50%;
+  margin-left:-21px;margin-top:-21px;
+  background:
+    radial-gradient(circle at 28% 25%,#fff7d6 0%,#ffe084 25%,#f5b338 55%,#a06a14 95%);
+  display:grid;place-items:center;
+  color:#3a2606;
+  box-shadow:
+    inset -1.5px -2.5px 5px rgba(80,50,10,.65),
+    inset 1.5px 2.5px 4px rgba(255,250,220,.55),
+    inset 0 0 8px rgba(255,216,122,.3),
+    0 0 14px rgba(245,179,56,.6),
+    0 3px 10px rgba(0,0,0,.45);
+  transform-origin:center;
+  animation:coinSpin linear infinite;
+}
+.orbit.r1 .coin{animation-duration:32s;animation-direction:reverse}
+.orbit.r2 .coin{animation-duration:48s;animation-direction:normal}
+.orbit.r3 .coin{animation-duration:64s;animation-direction:reverse}
+@keyframes coinSpin{to{transform:translate(var(--tx,0),var(--ty,0)) rotate(360deg)}}
+.coin svg{width:18px;height:18px;color:#3a2606;filter:drop-shadow(0 1px 0 rgba(255,235,180,.5))}
+.coin::after{
+  content:'';position:absolute;inset:2px;border-radius:50%;
+  border:1px solid rgba(110,75,20,.4);pointer-events:none;
+}
+/* Coin positions on each ring — using --tx/--ty to offset from center */
+.r1 .c1{--tx:0px;--ty:-150px}
+.r1 .c2{--tx:130px;--ty:75px}
+.r1 .c3{--tx:-130px;--ty:75px}
+.r2 .c4{--tx:185px;--ty:0px}
+.r2 .c5{--tx:-92px;--ty:-160px}
+.r2 .c6{--tx:-92px;--ty:160px}
+.coin{transform:translate(var(--tx,0),var(--ty,0))}
+
+/* Coin tooltip on hover (desktop) */
+.coin-name{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(6px);
+  font-size:.55rem;font-family:var(--f-mono);font-weight:600;
+  color:var(--gold-2);letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(15,15,20,.92);
+  padding:3px 8px;border-radius:6px;border:1px solid var(--bdr-2);
+  white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.coin:hover .coin-name{opacity:1}
+@media(hover:none){.coin-name{display:none}}
+
 @media(max-width:980px){
-  .hero{grid-template-columns:1fr;gap:30px;padding:50px 0 32px;text-align:center;min-height:auto}
-  .hero-l{text-align:left}
+  .hero{grid-template-columns:1fr;gap:30px;padding:50px 0 32px;min-height:auto}
   .hero-r{margin:0 auto}
-  .orb{width:220px;height:220px}
+  .orb-system{width:280px;height:280px}
   .orb-sphere{width:160px;height:160px}
+  .orb-glow{inset:45px}
+  .r1 .c1{--tx:0px;--ty:-115px} .r1 .c2{--tx:100px;--ty:58px} .r1 .c3{--tx:-100px;--ty:58px}
+  .r2 .c4{--tx:140px;--ty:0px} .r2 .c5{--tx:-70px;--ty:-122px} .r2 .c6{--tx:-70px;--ty:122px}
+  .orbit.r1{inset:25px} .orbit.r3{inset:-20px}
+  .coin{width:36px;height:36px;margin-left:-18px;margin-top:-18px}
+  .coin svg{width:16px;height:16px}
 }
 @media(max-width:640px){
   .hs-item{padding:10px 16px;flex:1 1 44%}
   .hs-item+.hs-item::before{display:none}
   .hero-strip{max-width:100%;border-radius:18px}
-  .hero-l{text-align:center}
-  .hero-eyebrow{font-size:.6rem}
-  .orb{width:180px;height:180px}
+  .hero-l{text-align:left}
+  .orb-system{width:240px;height:240px}
   .orb-sphere{width:130px;height:130px}
+  .orb-glow{inset:40px}
+  .r1 .c1{--tx:0px;--ty:-95px} .r1 .c2{--tx:82px;--ty:48px} .r1 .c3{--tx:-82px;--ty:48px}
+  .r2 .c4{--tx:118px;--ty:0px} .r2 .c5{--tx:-60px;--ty:-105px} .r2 .c6{--tx:-60px;--ty:105px}
+  .orbit.r1{inset:20px} .orbit.r3{inset:-15px}
+  .coin{width:30px;height:30px;margin-left:-15px;margin-top:-15px}
+  .coin svg{width:13px;height:13px}
 }
 
-/* ════════════════════════════════════════════════════
-   CARD SYSTEM — Premium glass with subtle warmth
-   ════════════════════════════════════════════════════ */
+/* ── Card base ── */
 .card{
   position:relative;
-  background:
-    linear-gradient(135deg,rgba(245,235,214,.025),rgba(245,235,214,.008)),
-    var(--surface);
-  border:1px solid var(--bdr);
-  border-radius:var(--r-lg);
+  background:linear-gradient(135deg,rgba(245,235,214,.025),rgba(245,235,214,.008)),var(--surface);
+  border:1px solid var(--bdr);border-radius:var(--r-lg);
   transition:transform .5s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease);
-  overflow:hidden;
-  box-shadow:var(--sh-2);
+  overflow:hidden;box-shadow:var(--sh-2);
   backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
 }
+:root[data-theme="light"] .card{background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.4)),var(--surface)}
 .card::before{
   content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   background:linear-gradient(90deg,transparent,rgba(245,179,56,.35),transparent);
   opacity:.5;
 }
-.card:hover{
-  border-color:var(--bdr-2);
-  transform:translateY(-3px);
-  box-shadow:var(--sh-3),0 12px 40px rgba(245,179,56,.08);
-}
-.card.feature{
-  background:
-    linear-gradient(135deg,rgba(245,179,56,.07),rgba(245,179,56,.01)),
-    var(--surface);
-  border-color:var(--bdr-2);
-}
-.card.feature::after{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--gold-3),var(--gold),var(--gold-deep));
-  box-shadow:0 0 20px rgba(245,179,56,.6);
-}
+.card:hover{border-color:var(--bdr-2);transform:translateY(-3px);box-shadow:var(--sh-3),0 12px 40px var(--gold-soft)}
+.card.feature{background:linear-gradient(135deg,var(--gold-soft),var(--gold-faint)),var(--surface);border-color:var(--bdr-2)}
+.card.feature::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold-3),var(--gold),var(--gold-deep));box-shadow:0 0 20px rgba(245,179,56,.6)}
 
-/* ════════════════════════════════════════════════════
-   SECTION HEADERS
-   ════════════════════════════════════════════════════ */
-.sec{
-  display:flex;align-items:baseline;gap:16px;
-  margin:48px 0 20px;
-}
-.sec-num{
-  font-family:var(--f-mono);font-size:.62rem;
-  color:var(--gold-2);font-weight:500;letter-spacing:.08em;
-  padding:4px 9px;background:var(--gold-soft);
-  border:1px solid var(--bdr-2);border-radius:var(--r-xs);
-}
-.sec-title{
-  font-family:var(--f);font-size:1.1rem;font-weight:600;
-  letter-spacing:-.015em;color:var(--text);
-}
-.sec-line{
-  flex:1;height:1px;
-  background:linear-gradient(90deg,rgba(245,179,56,.20) 0%,transparent 70%);
-}
-.sec-tag{
-  font-size:.58rem;font-weight:600;color:var(--text-3);
-  letter-spacing:.14em;text-transform:uppercase;
-  font-family:var(--f-mono);
-}
+/* ── Section headers ── */
+.sec{display:flex;align-items:baseline;gap:16px;margin:48px 0 20px}
+.sec-num{font-family:var(--f-mono);font-size:.62rem;color:var(--gold-2);font-weight:500;letter-spacing:.08em;padding:4px 9px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:var(--r-xs)}
+:root[data-theme="light"] .sec-num{color:var(--gold)}
+.sec-title{font-family:var(--f);font-size:1.1rem;font-weight:600;letter-spacing:-.015em;color:var(--text)}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(245,179,56,.20) 0%,transparent 70%)}
+.sec-tag{font-size:.58rem;font-weight:600;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;font-family:var(--f-mono)}
 @media(max-width:520px){.sec{margin:36px 0 18px}.sec-title{font-size:.95rem}}
 
-/* ════════════════════════════════════════════════════
-   SIGNAL ENGINE — Hero decision card
-   ════════════════════════════════════════════════════ */
-.engine{
-  padding:38px;
-  display:grid;grid-template-columns:1.4fr auto;gap:48px;
-  align-items:center;
-  position:relative;overflow:hidden;
+/* ── Diagnostic banner ── */
+.diag{
+  display:none;
+  margin:16px 0 0;padding:14px 18px;
+  background:var(--red-soft);border:1px solid rgba(248,113,113,.3);
+  border-radius:var(--r-md);
+  font-size:.78rem;color:var(--red);
+  display:none;align-items:center;gap:12px;
 }
-.engine::before{
-  content:'';position:absolute;top:-100px;right:-100px;
-  width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,179,56,.06),transparent 65%);
-  pointer-events:none;
-}
+.diag.show{display:flex}
+.diag-ico{flex-shrink:0;width:18px;height:18px}
+.diag-msg{flex:1}
+.diag-msg strong{font-weight:600}
+.diag-act{padding:6px 14px;background:var(--red);color:#fff;border-radius:8px;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-family:var(--f);transition:transform .2s}
+.diag-act:hover{transform:translateY(-1px)}
+
+/* ── Signal engine ── */
+.engine{padding:38px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;position:relative;overflow:hidden}
+.engine::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--gold-soft),transparent 65%);pointer-events:none}
 .eng-l{min-width:0;position:relative;z-index:2}
-.eng-lbl{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:.62rem;font-weight:600;
-  letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold-2);margin-bottom:14px;
-}
-.eng-lbl-dot{
-  width:7px;height:7px;border-radius:50%;background:var(--gold-2);
-  box-shadow:0 0 12px var(--gold-2);animation:livePulse 2s ease-in-out infinite;
-}
-.eng-sig{
-  font-family:var(--f);font-size:clamp(2.6rem,5.6vw,3.8rem);
-  font-weight:600;letter-spacing:-.04em;line-height:.95;
-  margin-bottom:18px;
-  color:var(--text);
-}
-.eng-sig.buy{
-  background:linear-gradient(135deg,#d1fae5,#86efac 40%,#22c55e);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 24px rgba(74,222,128,.4));
-}
-.eng-sig.hold{
-  background:linear-gradient(135deg,var(--gold-4),var(--gold-2) 50%,var(--gold-deep));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 24px rgba(245,179,56,.4));
-}
-.eng-sig.wait{
-  background:linear-gradient(135deg,#e5e7eb,#9ca3af 50%,#4b5563);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.eng-lbl{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);margin-bottom:14px}
+:root[data-theme="light"] .eng-lbl{color:var(--gold)}
+.eng-lbl-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor;animation:livePulse 2s ease-in-out infinite}
+.eng-sig{font-family:var(--f);font-size:clamp(2.6rem,5.6vw,3.8rem);font-weight:600;letter-spacing:-.04em;line-height:.95;margin-bottom:18px;color:var(--text)}
+.eng-sig.buy{background:linear-gradient(135deg,#d1fae5,#86efac 40%,#22c55e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 24px rgba(74,222,128,.4))}
+.eng-sig.hold{background:linear-gradient(135deg,var(--gold-4),var(--gold-2) 50%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 24px rgba(245,179,56,.4))}
+.eng-sig.wait{background:linear-gradient(135deg,#e5e7eb,#9ca3af 50%,#4b5563);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+:root[data-theme="light"] .eng-sig.buy{background:linear-gradient(135deg,#15803d,#16a34a 50%,#14532d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:none}
+:root[data-theme="light"] .eng-sig.hold{background:linear-gradient(135deg,var(--gold),var(--gold-2) 50%,var(--gold-3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:none}
+:root[data-theme="light"] .eng-sig.wait{background:linear-gradient(135deg,#6b7280,#4b5563 50%,#1f2937);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .eng-desc{font-size:.92rem;color:var(--text-2);line-height:1.65;max-width:480px;margin-bottom:22px}
 .eng-etfs{display:flex;flex-wrap:wrap;gap:8px}
-.eng-etf{
-  padding:6px 12px;background:var(--gold-soft);border:1px solid var(--bdr-2);
-  border-radius:var(--r-pill);font-size:.66rem;font-weight:500;color:var(--gold-2);
-  font-family:var(--f-mono);letter-spacing:.04em;
-  display:inline-flex;align-items:center;gap:6px;
-}
-.eng-etf .d{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.eng-etf{padding:6px 12px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:var(--r-pill);font-size:.66rem;font-weight:500;color:var(--gold-2);font-family:var(--f-mono);letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px}
+:root[data-theme="light"] .eng-etf{color:var(--gold)}
+.eng-etf .d{width:5px;height:5px;border-radius:50%;background:currentColor}
 
-/* Probability ring */
-.prob-ring{
-  position:relative;width:200px;height:200px;flex-shrink:0;
-}
+.prob-ring{position:relative;width:200px;height:200px;flex-shrink:0}
 .prob-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .prob-ring-bg{fill:none;stroke:rgba(245,235,214,.06);stroke-width:6}
-.prob-ring-fg{
-  fill:none;stroke-width:6;stroke-linecap:round;
-  transition:stroke-dashoffset 1.8s var(--ease);
-  filter:drop-shadow(0 0 12px rgba(245,179,56,.5));
-}
-.prob-ring-c{
-  position:absolute;inset:0;display:grid;place-items:center;
-  text-align:center;flex-direction:column;
-}
+:root[data-theme="light"] .prob-ring-bg{stroke:rgba(26,20,16,.06)}
+.prob-ring-fg{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.8s var(--ease);filter:drop-shadow(0 0 12px rgba(245,179,56,.5))}
+.prob-ring-c{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
 .prob-ring-c-inner{display:flex;flex-direction:column;align-items:center}
-.prob-ring-lbl{
-  font-size:.56rem;font-weight:600;color:var(--text-3);
-  letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px;
-}
-.prob-ring-v{
-  font-family:var(--f);font-size:2.6rem;font-weight:600;
-  letter-spacing:-.04em;color:var(--text);font-variant-numeric:tabular-nums;
-  line-height:1;
-}
+.prob-ring-lbl{font-size:.56rem;font-weight:600;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
+.prob-ring-v{font-family:var(--f);font-size:2.6rem;font-weight:600;letter-spacing:-.04em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
 .prob-ring-v .pct{font-size:.5em;color:var(--text-2);margin-left:2px;font-weight:500}
 .prob-ring-sub{font-size:.62rem;color:var(--gold-2);margin-top:6px;font-family:var(--f-mono);font-weight:500}
+:root[data-theme="light"] .prob-ring-sub{color:var(--gold)}
 
-@media(max-width:860px){
-  .engine{grid-template-columns:1fr;gap:32px;padding:28px;text-align:left}
-  .prob-ring{margin:0 auto;width:180px;height:180px}
-  .prob-ring-v{font-size:2.2rem}
-}
+@media(max-width:860px){.engine{grid-template-columns:1fr;gap:32px;padding:28px}.prob-ring{margin:0 auto;width:180px;height:180px}.prob-ring-v{font-size:2.2rem}}
 
-/* ════════════════════════════════════════════════════
-   PROBABILITY BAR
-   ════════════════════════════════════════════════════ */
+/* ── Probability bar ── */
 .probcard{padding:26px 30px;margin-bottom:18px}
 .prob-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;flex-wrap:wrap;gap:10px}
-.prob-title{
-  font-size:.7rem;font-weight:600;color:var(--text-2);
-  text-transform:uppercase;letter-spacing:.12em;
-}
+.prob-title{font-size:.7rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.12em}
 .prob-val{font-family:var(--f-mono);font-size:1rem;color:var(--gold-2);font-weight:500;font-variant-numeric:tabular-nums}
-.prob-track{
-  position:relative;height:12px;border-radius:8px;
-  background:rgba(245,235,214,.03);overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.4);
-}
-.prob-fill{
-  height:100%;border-radius:8px;width:0;position:relative;
-  background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold) 50%,var(--gold-2) 100%);
-  box-shadow:0 0 16px rgba(245,179,56,.5),inset 0 1px 0 rgba(255,255,255,.2);
-  transition:width 1.8s var(--ease);
-}
-.prob-fill::after{
-  content:'';position:absolute;top:0;right:-2px;bottom:0;width:40px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5));
-  animation:shimmer 2.6s ease-in-out infinite;
-}
-@keyframes shimmer{
-  0%,100%{opacity:0;transform:translateX(20px)}
-  50%{opacity:1;transform:translateX(0)}
-}
+:root[data-theme="light"] .prob-val{color:var(--gold)}
+.prob-track{position:relative;height:12px;border-radius:8px;background:rgba(245,235,214,.03);overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+:root[data-theme="light"] .prob-track{background:rgba(26,20,16,.06);box-shadow:inset 0 1px 2px rgba(60,40,10,.15)}
+.prob-fill{height:100%;border-radius:8px;width:0;position:relative;background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold) 50%,var(--gold-2) 100%);box-shadow:0 0 16px rgba(245,179,56,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:width 1.8s var(--ease)}
+.prob-fill::after{content:'';position:absolute;top:0;right:-2px;bottom:0;width:40px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5));animation:shimmer 2.6s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:0;transform:translateX(20px)}50%{opacity:1;transform:translateX(0)}}
 .prob-marks{display:flex;justify-content:space-between;margin-top:14px;font-size:.6rem;color:var(--text-3);letter-spacing:.06em;font-family:var(--f-mono)}
 .prob-marks span{position:relative;padding-top:6px}
 .prob-marks span::before{content:'';position:absolute;top:-8px;left:50%;width:1px;height:6px;background:var(--text-4)}
 .prob-marks span:first-child::before{left:0}
 .prob-marks span:last-child::before{left:auto;right:0}
 
-/* ════════════════════════════════════════════════════
-   GAUGES — Triple ring
-   ════════════════════════════════════════════════════ */
+/* ── Gauges ── */
 .gauges{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:14px;margin-bottom:18px}
-.gauge{
-  padding:30px 22px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-}
+.gauge{padding:30px 22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
 .gauge.hero-g{padding:36px 24px}
 .gauge-svg{width:100%;max-width:150px;height:auto}
 .gauge.hero-g .gauge-svg{max-width:180px}
 .gauge-bg{fill:none;stroke:rgba(245,235,214,.05);stroke-width:7;stroke-linecap:round}
+:root[data-theme="light"] .gauge-bg{stroke:rgba(26,20,16,.06)}
 .gauge.hero-g .gauge-bg{stroke-width:9}
 .gauge-fg{fill:none;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 1.8s var(--ease);filter:drop-shadow(0 0 8px rgba(245,179,56,.4))}
 .gauge.hero-g .gauge-fg{stroke-width:9;filter:drop-shadow(0 0 12px rgba(245,179,56,.6))}
-.gauge-val{
-  font-family:var(--f);font-size:2rem;font-weight:600;letter-spacing:-.04em;
-  color:var(--text);
-  margin-top:-12px;font-variant-numeric:tabular-nums;
-}
-.gauge.hero-g .gauge-val{
-  font-size:2.8rem;
-  background:linear-gradient(180deg,var(--gold-3),var(--gold-2) 50%,var(--gold));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.gauge-val{font-family:var(--f);font-size:2rem;font-weight:600;letter-spacing:-.04em;color:var(--text);margin-top:-12px;font-variant-numeric:tabular-nums}
+.gauge.hero-g .gauge-val{font-size:2.8rem;background:linear-gradient(180deg,var(--gold-3),var(--gold-2) 50%,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+:root[data-theme="light"] .gauge.hero-g .gauge-val{background:linear-gradient(180deg,var(--gold),var(--gold-2) 50%,var(--gold-3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .gauge-name{font-size:.62rem;font-weight:600;color:var(--text-2);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 .gauge-desc{font-size:.62rem;color:var(--text-3);margin-top:2px}
-@media(max-width:780px){
-  .gauges{grid-template-columns:1fr 1fr 1fr;gap:10px}
-  .gauge{padding:22px 10px}
-  .gauge-val{font-size:1.4rem}
-  .gauge.hero-g .gauge-val{font-size:1.8rem}
-}
-@media(max-width:480px){
-  .gauges{grid-template-columns:1fr}
-  .gauge{flex-direction:row;text-align:left;align-items:center;padding:20px 22px;gap:18px}
-  .gauge-svg{max-width:90px;flex-shrink:0}
-  .gauge.hero-g .gauge-svg{max-width:100px}
-  .gauge-val{font-size:1.7rem;margin-top:0}
-  .gauge.hero-g .gauge-val{font-size:2rem}
-  .gauge-name{margin-top:0}
-}
+@media(max-width:780px){.gauges{grid-template-columns:1fr 1fr 1fr;gap:10px}.gauge{padding:22px 10px}.gauge-val{font-size:1.4rem}.gauge.hero-g .gauge-val{font-size:1.8rem}}
+@media(max-width:480px){.gauges{grid-template-columns:1fr}.gauge{flex-direction:row;text-align:left;align-items:center;padding:20px 22px;gap:18px}.gauge-svg{max-width:90px;flex-shrink:0}.gauge.hero-g .gauge-svg{max-width:100px}.gauge-val{font-size:1.7rem;margin-top:0}.gauge.hero-g .gauge-val{font-size:2rem}.gauge-name{margin-top:0}}
 
-/* ════════════════════════════════════════════════════
-   MACRO MATRIX — 8 cells (4x2)
-   ════════════════════════════════════════════════════ */
+/* ── Macro matrix ── */
 .macro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.mcell{
-  padding:22px 22px 20px;
-  background:
-    linear-gradient(135deg,rgba(245,235,214,.02),rgba(245,235,214,.005)),
-    var(--surface);
-  border:1px solid var(--bdr);
-  border-radius:var(--r-md);
-  transition:transform .4s var(--ease),border-color .3s var(--ease),background .4s var(--ease);
-  position:relative;overflow:hidden;
-  backdrop-filter:blur(12px);
-}
-.mcell:hover{
-  border-color:var(--bdr-2);
-  transform:translateY(-2px);
-  box-shadow:0 12px 32px rgba(245,179,56,.08);
-}
-.mcell::before{
-  content:'';position:absolute;top:-50%;right:-30%;width:80%;height:120%;
-  background:radial-gradient(circle,var(--gold-soft),transparent 60%);
-  opacity:0;transition:opacity .4s var(--ease);
-}
+.mcell{padding:22px 22px 20px;background:linear-gradient(135deg,rgba(245,235,214,.02),rgba(245,235,214,.005)),var(--surface);border:1px solid var(--bdr);border-radius:var(--r-md);transition:transform .4s var(--ease),border-color .3s var(--ease),background .4s var(--ease);position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+:root[data-theme="light"] .mcell{background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.3)),var(--surface)}
+.mcell:hover{border-color:var(--bdr-2);transform:translateY(-2px);box-shadow:0 12px 32px var(--gold-soft)}
+.mcell::before{content:'';position:absolute;top:-50%;right:-30%;width:80%;height:120%;background:radial-gradient(circle,var(--gold-soft),transparent 60%);opacity:0;transition:opacity .4s var(--ease)}
 .mcell:hover::before{opacity:1}
 .mc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;position:relative}
-.mc-ico{
-  width:34px;height:34px;border-radius:10px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(245,179,56,.12),rgba(245,179,56,.02));
-  border:1px solid var(--bdr-2);
-  color:var(--gold-2);
-}
+.mc-ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold-soft),var(--gold-faint));border:1px solid var(--bdr-2);color:var(--gold-2)}
+:root[data-theme="light"] .mc-ico{color:var(--gold)}
 .mc-ico svg{width:16px;height:16px}
 .mc-name{font-size:.58rem;font-weight:600;color:var(--text-3);letter-spacing:.10em;text-transform:uppercase;text-align:right}
-.mc-val{
-  font-family:var(--f);font-size:1.6rem;font-weight:600;
-  letter-spacing:-.025em;color:var(--text);
-  margin-bottom:8px;font-variant-numeric:tabular-nums;
-  position:relative;
-}
+.mc-val{font-family:var(--f);font-size:1.6rem;font-weight:600;letter-spacing:-.025em;color:var(--text);margin-bottom:8px;font-variant-numeric:tabular-nums;position:relative}
 .mc-desc{font-size:.66rem;color:var(--text-3);line-height:1.55;margin-bottom:12px;position:relative}
-.mc-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:4px 10px;border-radius:var(--r-pill);
-  font-size:.6rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  position:relative;
-}
+.mc-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-pill);font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;position:relative}
 .mc-badge.bull{background:var(--green-soft);color:var(--green);border:1px solid rgba(74,222,128,.20)}
 .mc-badge.bear{background:var(--red-soft);color:var(--red);border:1px solid rgba(248,113,113,.20)}
 .mc-badge.neut{background:var(--gold-soft);color:var(--gold-2);border:1px solid var(--bdr-2)}
+:root[data-theme="light"] .mc-badge.neut{color:var(--gold)}
 .mc-bullet{width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 6px currentColor}
 @media(max-width:960px){.macro-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
 @media(max-width:420px){.macro-grid{grid-template-columns:1fr}.mcell{padding:18px}}
 
-/* ════════════════════════════════════════════════════
-   REGIME — Wide hero card
-   ════════════════════════════════════════════════════ */
-.regime{
-  padding:38px;margin-bottom:18px;
-  position:relative;overflow:hidden;
-  display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
-  transition:background .8s ease;
-}
-.regime::before{
-  content:'';position:absolute;top:-50%;right:-15%;
-  width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,var(--regime-glow,rgba(245,179,56,.12)),transparent 65%);
-  opacity:.8;pointer-events:none;
-  transition:background .8s ease;
-}
-.reg-orb{
-  width:60px;height:60px;border-radius:50%;
-  display:grid;place-items:center;flex-shrink:0;
-  background:radial-gradient(circle,var(--regime-glow,rgba(245,179,56,.30)),transparent 70%);
-  position:relative;z-index:2;
-}
-.reg-orb::before{
-  content:'';width:18px;height:18px;border-radius:50%;
-  background:var(--regime-dot,var(--gold));
-  box-shadow:0 0 28px var(--regime-dot,var(--gold));
-  animation:orbPulse 2.6s ease-in-out infinite;
-}
-@keyframes orbPulse{
-  0%,100%{transform:scale(1);opacity:1}
-  50%{transform:scale(1.35);opacity:.7}
-}
+/* ── Regime ── */
+.regime{padding:38px;margin-bottom:18px;position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;transition:background .8s ease}
+.regime::before{content:'';position:absolute;top:-50%;right:-15%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--regime-glow,rgba(245,179,56,.12)),transparent 65%);opacity:.8;pointer-events:none;transition:background .8s ease}
+.reg-orb{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:radial-gradient(circle,var(--regime-glow,rgba(245,179,56,.30)),transparent 70%);position:relative;z-index:2}
+.reg-orb::before{content:'';width:18px;height:18px;border-radius:50%;background:var(--regime-dot,var(--gold));box-shadow:0 0 28px var(--regime-dot,var(--gold));animation:orbPulse 2.6s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.7}}
 .reg-meta{flex:1;min-width:0;position:relative;z-index:2}
 .reg-mlbl{font-size:.6rem;font-weight:600;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
-.reg-name{
-  font-family:var(--f);font-size:1.7rem;font-weight:600;
-  letter-spacing:-.02em;color:var(--text);margin-bottom:10px;
-}
+.reg-name{font-family:var(--f);font-size:1.7rem;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:10px}
 .reg-desc{font-size:.88rem;color:var(--text-2);line-height:1.65;max-width:760px}
-.reg-mult{
-  padding:10px 16px;background:var(--gold-soft);
-  border:1px solid var(--bdr-2);border-radius:var(--r-md);
-  font-family:var(--f-mono);font-size:.84rem;color:var(--gold-2);
-  font-weight:500;flex-shrink:0;text-align:center;position:relative;z-index:2;
-}
+.reg-mult{padding:10px 16px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:var(--r-md);font-family:var(--f-mono);font-size:.84rem;color:var(--gold-2);font-weight:500;flex-shrink:0;text-align:center;position:relative;z-index:2}
+:root[data-theme="light"] .reg-mult{color:var(--gold)}
 .reg-mult .l{display:block;font-size:.54rem;color:var(--text-3);font-family:var(--f);letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:4px}
-@media(max-width:780px){
-  .regime{padding:26px;grid-template-columns:auto 1fr;gap:18px}
-  .reg-mult{grid-column:1/-1;justify-self:start}
-  .reg-name{font-size:1.3rem}
-  .reg-orb{width:48px;height:48px}
-  .reg-orb::before{width:14px;height:14px}
-}
+@media(max-width:780px){.regime{padding:26px;grid-template-columns:auto 1fr;gap:18px}.reg-mult{grid-column:1/-1;justify-self:start}.reg-name{font-size:1.3rem}.reg-orb{width:48px;height:48px}.reg-orb::before{width:14px;height:14px}}
 
-/* ════════════════════════════════════════════════════
-   PORTFOLIO — Two-panel layout
-   ════════════════════════════════════════════════════ */
+/* ── Portfolio ── */
 .portfolio{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:18px}
 .port-card{padding:30px 32px;position:relative;overflow:hidden}
-.port-card.deploy::before{
-  content:'';position:absolute;top:0;right:0;width:300px;height:300px;
-  background:radial-gradient(circle at top right,rgba(245,179,56,.10),transparent 60%);
-  pointer-events:none;
-}
-.port-lbl{
-  display:flex;align-items:center;gap:9px;
-  font-size:.62rem;font-weight:600;color:var(--gold-2);
-  letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;
-  position:relative;
-}
-.port-val{
-  font-family:var(--f);font-size:2.6rem;font-weight:600;
-  letter-spacing:-.04em;
-  background:linear-gradient(135deg,var(--gold-3),var(--gold-2) 40%,var(--gold-deep));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:6px;font-variant-numeric:tabular-nums;line-height:1;
-  position:relative;
-}
+.port-card.deploy::before{content:'';position:absolute;top:0;right:0;width:300px;height:300px;background:radial-gradient(circle at top right,var(--gold-soft),transparent 60%);pointer-events:none}
+.port-lbl{display:flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;color:var(--gold-2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;position:relative}
+:root[data-theme="light"] .port-lbl{color:var(--gold)}
+.port-val{font-family:var(--f);font-size:2.6rem;font-weight:600;letter-spacing:-.04em;background:linear-gradient(135deg,var(--gold-3),var(--gold-2) 40%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;font-variant-numeric:tabular-nums;line-height:1;position:relative}
+:root[data-theme="light"] .port-val{background:linear-gradient(135deg,var(--gold),var(--gold-2) 40%,var(--gold-3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .port-val-sub{font-size:.74rem;color:var(--text-3);font-family:var(--f-mono);margin-bottom:22px;letter-spacing:.04em;position:relative}
 .port-cta{font-size:.74rem;color:var(--text-2);margin-bottom:20px;line-height:1.6;position:relative;max-width:380px}
 .port-cta strong{color:var(--gold-2);font-weight:500}
+:root[data-theme="light"] .port-cta strong{color:var(--gold)}
 .port-bar-wrap{position:relative;margin-bottom:10px}
-.port-bar{
-  position:relative;height:10px;border-radius:6px;
-  background:rgba(245,235,214,.03);overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.4);
-}
-.port-bar-fill{
-  height:100%;border-radius:6px;width:0;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-2));
-  box-shadow:0 0 14px rgba(245,179,56,.5),inset 0 1px 0 rgba(255,255,255,.2);
-  transition:width 1.8s var(--ease);
-  position:relative;
-}
-.port-bar-fill::after{
-  content:'';position:absolute;top:0;right:-2px;bottom:0;width:30px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));
-  animation:shimmer 2.6s ease-in-out infinite;
-}
+.port-bar{position:relative;height:10px;border-radius:6px;background:rgba(245,235,214,.03);overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+:root[data-theme="light"] .port-bar{background:rgba(26,20,16,.06);box-shadow:inset 0 1px 2px rgba(60,40,10,.12)}
+.port-bar-fill{height:100%;border-radius:6px;width:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-2));box-shadow:0 0 14px rgba(245,179,56,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:width 1.8s var(--ease);position:relative}
+.port-bar-fill::after{content:'';position:absolute;top:0;right:-2px;bottom:0;width:30px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));animation:shimmer 2.6s ease-in-out infinite}
 .port-stats{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-3);font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:.04em}
-
 .port-return{display:flex;flex-direction:column}
 .pr-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-bottom:18px}
 .pr-mini-lbl{font-size:.56rem;font-weight:600;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
 .pr-mini-val{font-family:var(--f);font-size:1.4rem;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
 .pr-mini-val.gold{color:var(--gold-2)}
+:root[data-theme="light"] .pr-mini-val.gold{color:var(--gold)}
 .pr-mini-val.green{color:var(--green)}
 .pr-mini-val.red{color:var(--red)}
 .pr-note{font-size:.7rem;color:var(--text-3);line-height:1.65;padding-top:18px;border-top:1px solid var(--bdr-line);margin-top:auto}
 .pr-note strong{color:var(--text-2);font-weight:500}
 @media(max-width:860px){.portfolio{grid-template-columns:1fr}.port-card{padding:24px}.port-val{font-size:2rem}}
 
-/* ════════════════════════════════════════════════════
-   REASONING — 2x2 grid
-   ════════════════════════════════════════════════════ */
+/* ── Reasoning ── */
 .reasoning{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
-.rc{
-  padding:24px 26px;
-  background:
-    linear-gradient(135deg,rgba(245,235,214,.02),transparent),
-    var(--surface);
-  border:1px solid var(--bdr);
-  border-radius:var(--r-md);
-  transition:all .4s var(--ease);
-  backdrop-filter:blur(12px);
-  position:relative;overflow:hidden;
-}
-.rc::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(245,179,56,.25),transparent);
-}
-.rc:hover{border-color:var(--bdr-2);transform:translateY(-2px);background:linear-gradient(135deg,rgba(245,179,56,.03),transparent),var(--surface-2)}
+.rc{padding:24px 26px;background:linear-gradient(135deg,rgba(245,235,214,.02),transparent),var(--surface);border:1px solid var(--bdr);border-radius:var(--r-md);transition:all .4s var(--ease);backdrop-filter:blur(12px);position:relative;overflow:hidden}
+:root[data-theme="light"] .rc{background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.3)),var(--surface)}
+.rc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,179,56,.25),transparent)}
+.rc:hover{border-color:var(--bdr-2);transform:translateY(-2px)}
 .rc-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.rc-ico{
-  width:36px;height:36px;border-radius:10px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(245,179,56,.12),rgba(245,179,56,.02));
-  border:1px solid var(--bdr-2);
-  color:var(--gold-2);
-}
+.rc-ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold-soft),var(--gold-faint));border:1px solid var(--bdr-2);color:var(--gold-2)}
+:root[data-theme="light"] .rc-ico{color:var(--gold)}
 .rc-ico svg{width:16px;height:16px}
 .rc-title{font-family:var(--f);font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:-.01em}
 .rc-body{font-size:.82rem;color:var(--text-2);line-height:1.7}
 @media(max-width:640px){.reasoning{grid-template-columns:1fr}}
 
-/* ════════════════════════════════════════════════════
-   CHART
-   ════════════════════════════════════════════════════ */
+/* ── Chart ── */
 .chart-wrap{padding:28px 30px;margin-bottom:36px;position:relative;overflow:hidden}
 .chart-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap;gap:14px}
 .chart-title{font-family:var(--f);font-size:1rem;font-weight:600;color:var(--text);letter-spacing:-.01em;margin-bottom:4px}
@@ -874,66 +710,31 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .chart-canvas canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
 @media(max-width:640px){.chart-wrap{padding:22px 16px}.chart-canvas{height:240px}.chart-stats{gap:18px}}
 
-/* ════════════════════════════════════════════════════
-   FOOTER
-   ════════════════════════════════════════════════════ */
-footer{
-  border-top:1px solid var(--bdr-line);
-  padding:36px 0 48px;text-align:center;
-  margin-top:32px;
-  position:relative;
-}
-footer::before{
-  content:'';position:absolute;top:-1px;left:30%;right:30%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(245,179,56,.2),transparent);
-}
+/* ── Footer ── */
+footer{border-top:1px solid var(--bdr-line);padding:36px 0 48px;text-align:center;margin-top:32px;position:relative}
+footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,179,56,.2),transparent)}
 .ft-brand{font-family:var(--f);font-size:.84rem;font-weight:600;color:var(--text-2);margin-bottom:8px;letter-spacing:-.01em}
 .ft-disc{font-size:.62rem;color:var(--text-4);font-family:var(--f-mono);letter-spacing:.04em;line-height:1.65;max-width:540px;margin:0 auto}
 
-/* ════════════════════════════════════════════════════
-   TOAST
-   ════════════════════════════════════════════════════ */
-.toast{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(140px);
-  z-index:200;
-  background:rgba(28,28,34,.96);backdrop-filter:blur(24px);
-  border:1px solid var(--bdr-2);border-radius:var(--r-md);
-  padding:13px 22px;
-  display:flex;align-items:center;gap:10px;
-  font-size:.78rem;color:var(--text);
-  box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px rgba(245,179,56,.12);
-  transition:transform .5s var(--ease);
-  max-width:92vw;
-}
+/* ── Toast ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(140px);z-index:200;background:rgba(28,28,34,.96);backdrop-filter:blur(24px);border:1px solid var(--bdr-2);border-radius:var(--r-md);padding:13px 22px;display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text);box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px var(--gold-soft);transition:transform .5s var(--ease);max-width:92vw}
+:root[data-theme="light"] .toast{background:rgba(26,20,16,.92);color:#fffbf2;border-color:rgba(201,138,26,.4)}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{border-color:rgba(248,113,113,.3)}
 .toast-ico{font-size:1rem;color:var(--gold-2)}
+:root[data-theme="light"] .toast-ico{color:var(--gold-3)}
 .toast.err .toast-ico{color:var(--red)}
 
-/* ════════════════════════════════════════════════════
-   ENTRANCE ANIMATIONS
-   ════════════════════════════════════════════════════ */
+/* ── Entrance animations ── */
 .fi{opacity:0;transform:translateY(20px);animation:fadeUp .9s var(--ease) forwards}
-.fi.d1{animation-delay:.08s}
-.fi.d2{animation-delay:.16s}
-.fi.d3{animation-delay:.24s}
-.fi.d4{animation-delay:.32s}
-.fi.d5{animation-delay:.40s}
-.fi.d6{animation-delay:.48s}
-.fi.d7{animation-delay:.56s}
-.fi.d8{animation-delay:.64s}
+.fi.d1{animation-delay:.08s}.fi.d2{animation-delay:.16s}.fi.d3{animation-delay:.24s}.fi.d4{animation-delay:.32s}.fi.d5{animation-delay:.40s}.fi.d6{animation-delay:.48s}.fi.d7{animation-delay:.56s}.fi.d8{animation-delay:.64s}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════════
-     AMBIENT BACKDROP + CURSOR
-     ════════════════════════════════════════════════════ -->
 <div class="amb">
   <div class="amb-grad"></div>
   <div class="amb-grid"></div>
@@ -942,66 +743,18 @@ footer::before{
 <canvas id="particles"></canvas>
 <div class="cursor" id="cursor"></div>
 
-<!-- ════════════════════════════════════════════════════
-     SVG SYMBOLS — Reusable icons
-     ════════════════════════════════════════════════════ -->
+<!-- SVG Symbols -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
-    <linearGradient id="gradMacro" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#c98a1a"/>
-      <stop offset="100%" stop-color="#ffd87a"/>
-    </linearGradient>
-    <linearGradient id="gradComp" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffe9b3"/>
-      <stop offset="50%" stop-color="#ffd87a"/>
-      <stop offset="100%" stop-color="#c98a1a"/>
-    </linearGradient>
-    <linearGradient id="gradTech" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#c98a1a"/>
-      <stop offset="100%" stop-color="#f5b338"/>
-    </linearGradient>
-    <linearGradient id="gradRing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe9b3"/>
-      <stop offset="50%" stop-color="#f5b338"/>
-      <stop offset="100%" stop-color="#8a5e1c"/>
-    </linearGradient>
-    <linearGradient id="gradBrand" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffd87a"/>
-      <stop offset="100%" stop-color="#c98a1a"/>
-    </linearGradient>
+    <linearGradient id="gradMacro" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#c98a1a"/><stop offset="100%" stop-color="#ffd87a"/></linearGradient>
+    <linearGradient id="gradComp" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffe9b3"/><stop offset="50%" stop-color="#ffd87a"/><stop offset="100%" stop-color="#c98a1a"/></linearGradient>
+    <linearGradient id="gradTech" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#c98a1a"/><stop offset="100%" stop-color="#f5b338"/></linearGradient>
+    <linearGradient id="gradRing" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe9b3"/><stop offset="50%" stop-color="#f5b338"/><stop offset="100%" stop-color="#8a5e1c"/></linearGradient>
 
-    <!-- Sunburst — the signature motif -->
-    <symbol id="i-sun" viewBox="0 0 24 24">
-      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none">
-        <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
-        <line x1="12" y1="3" x2="12" y2="6"/>
-        <line x1="12" y1="18" x2="12" y2="21"/>
-        <line x1="3" y1="12" x2="6" y2="12"/>
-        <line x1="18" y1="12" x2="21" y2="12"/>
-        <line x1="5.6" y1="5.6" x2="7.8" y2="7.8"/>
-        <line x1="16.2" y1="16.2" x2="18.4" y2="18.4"/>
-        <line x1="18.4" y1="5.6" x2="16.2" y2="7.8"/>
-        <line x1="7.8" y1="16.2" x2="5.6" y2="18.4"/>
-      </g>
-    </symbol>
-
-    <!-- Burst large for orb -->
-    <symbol id="i-burst" viewBox="0 0 300 300">
-      <g stroke="url(#gradBrand)" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".5">
-        <line x1="150" y1="0" x2="150" y2="40"/>
-        <line x1="150" y1="260" x2="150" y2="300"/>
-        <line x1="0" y1="150" x2="40" y2="150"/>
-        <line x1="260" y1="150" x2="300" y2="150"/>
-        <line x1="44" y1="44" x2="72" y2="72"/>
-        <line x1="228" y1="228" x2="256" y2="256"/>
-        <line x1="256" y1="44" x2="228" y2="72"/>
-        <line x1="72" y1="228" x2="44" y2="256"/>
-        <line x1="150" y1="14" x2="150" y2="28" opacity=".3"/>
-        <line x1="150" y1="272" x2="150" y2="286" opacity=".3"/>
-        <line x1="14" y1="150" x2="28" y2="150" opacity=".3"/>
-        <line x1="272" y1="150" x2="286" y2="150" opacity=".3"/>
-      </g>
-    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="16.2" y2="7.8"/><line x1="7.8" y1="16.2" x2="5.6" y2="18.4"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.4L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.4L3 16M3 21v-5h5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 
     <!-- Macro icons -->
     <symbol id="i-vix" viewBox="0 0 24 24"><path d="M3 17L7 11L11 14L17 6L21 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
@@ -1018,14 +771,19 @@ footer::before{
     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" stroke="currentColor" stroke-width="1.5" fill="none"/></symbol>
     <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 21V8M9 21v-9M15 21V4M21 21V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4-3 8-8 9-5-1-8-5-8-9V6l8-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+
+    <!-- Ancient coin engravings -->
+    <symbol id="c-greek" viewBox="0 0 20 20"><!-- Greek Owl --><ellipse cx="7.5" cy="10" rx="1.6" ry="2" fill="currentColor"/><ellipse cx="12.5" cy="10" rx="1.6" ry="2" fill="currentColor"/><circle cx="7.5" cy="10" r=".5" fill="#fff6da"/><circle cx="12.5" cy="10" r=".5" fill="#fff6da"/><path d="M6 7L5 5M14 7L15 5M10 12 L9.5 14 L10.5 14 Z" stroke="currentColor" stroke-width=".8" stroke-linecap="round" fill="currentColor"/></symbol>
+    <symbol id="c-roman" viewBox="0 0 20 20"><!-- Roman head profile --><path d="M7 5 Q6.5 6 6.5 8 Q6.5 11 7 13 Q7.5 14.5 10 14.5 Q12.5 14.5 13 13 L13 9 Q13 7 12 6 Q11 5 10 5 Z" fill="currentColor"/><path d="M6 5 Q7 4 9 4" stroke="currentColor" stroke-width=".7" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="c-british" viewBox="0 0 20 20"><!-- British Crown --><path d="M4 13 L5 7 L7.5 9.5 L10 6 L12.5 9.5 L15 7 L16 13 Z" fill="currentColor"/><path d="M4 13 L16 13" stroke="#3a2606" stroke-width=".8"/><circle cx="5" cy="7" r=".7" fill="currentColor"/><circle cx="10" cy="6" r=".7" fill="currentColor"/><circle cx="15" cy="7" r=".7" fill="currentColor"/></symbol>
+    <symbol id="c-indian" viewBox="0 0 20 20"><!-- Indian Sun-with-rays Mohur --><circle cx="10" cy="10" r="2.8" fill="currentColor"/><g stroke="currentColor" stroke-width="1" stroke-linecap="round"><line x1="10" y1="3.5" x2="10" y2="5.5"/><line x1="10" y1="14.5" x2="10" y2="16.5"/><line x1="3.5" y1="10" x2="5.5" y2="10"/><line x1="14.5" y1="10" x2="16.5" y2="10"/><line x1="5.4" y1="5.4" x2="6.8" y2="6.8"/><line x1="13.2" y1="13.2" x2="14.6" y2="14.6"/><line x1="14.6" y1="5.4" x2="13.2" y2="6.8"/><line x1="6.8" y1="13.2" x2="5.4" y2="14.6"/></g></symbol>
+    <symbol id="c-chinese" viewBox="0 0 20 20"><!-- Chinese cash with square hole --><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1"/><rect x="8" y="8" width="4" height="4" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.5 6 L6 7.5 M15.5 6 L14 7.5 M4.5 14 L6 12.5 M15.5 14 L14 12.5" stroke="currentColor" stroke-width=".8" stroke-linecap="round"/></symbol>
+    <symbol id="c-spanish" viewBox="0 0 20 20"><!-- Spanish cross --><path d="M10 3 L10 17 M3 10 L17 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="10" r="1.4" fill="currentColor"/><path d="M10 3 L9 4 L11 4 Z M10 17 L9 16 L11 16 Z M3 10 L4 9 L4 11 Z M17 10 L16 9 L16 11 Z" fill="currentColor"/></symbol>
   </defs>
 </svg>
 
 <div class="wrap">
 
-  <!-- ════════════════════════════════════════════════════
-       HEADER
-       ════════════════════════════════════════════════════ -->
   <header class="hdr">
     <div class="container hdr-inner">
       <div class="brand">
@@ -1036,72 +794,68 @@ footer::before{
         </div>
       </div>
       <div class="hdr-right">
-        <div class="status-pill" id="statusPill">
-          <span class="status-dot"></span><span id="statusLabel">Live</span>
+        <div class="theme-toggle" role="group" aria-label="Theme">
+          <button class="theme-btn active" data-theme-set="dark" aria-label="Dark mode"><svg><use href="#i-moon"/></svg></button>
+          <button class="theme-btn" data-theme-set="light" aria-label="Light mode"><svg><use href="#i-sun"/></svg></button>
         </div>
+        <button class="status-pill" id="statusPill" title="Click to refresh">
+          <span class="status-dot"></span><span id="statusLabel">Live</span>
+        </button>
         <span class="upd-meta" id="updMeta">—</span>
       </div>
     </div>
   </header>
 
-  <!-- ════════════════════════════════════════════════════
-       TICKER TAPE — Bloomberg-style live strip
-       ════════════════════════════════════════════════════ -->
   <div class="ticker">
     <div class="ticker-track" id="tickerTrack"></div>
   </div>
 
   <main class="container">
 
-    <!-- ════════════════════════════════════════════════════
-         HERO
-         ════════════════════════════════════════════════════ -->
+    <!-- Diagnostic banner -->
+    <div class="diag" id="diag" role="alert">
+      <svg class="diag-ico"><use href="#i-warn"/></svg>
+      <div class="diag-msg" id="diagMsg">—</div>
+      <button class="diag-act" id="diagAct">Retry</button>
+    </div>
+
     <section class="hero">
       <div class="hero-l fi">
-        <div class="hero-eyebrow">
-          <span class="live-d"></span>
-          COMEX · XAU/USD · Real-Time
-        </div>
-        <h1 class="hero-price" id="heroPriceWrap">
-          <span class="cur">$</span><span class="int" id="heroPriceInt">—,—</span><span class="dec" id="heroPriceDec">.00</span>
+        <div class="hero-eyebrow"><span class="live-d"></span>COMEX · XAU/USD · Real-Time</div>
+        <h1 class="hero-price loading" id="heroPriceWrap">
+          <span class="cur">$</span><span class="int" id="heroPriceInt">—,—</span><span class="dec" id="heroPriceDec">.—</span>
         </h1>
         <div class="hero-sub">USD per Troy Ounce</div>
-        <div class="hero-delta flat" id="heroDelta">
+        <div class="hero-delta flat hidden" id="heroDelta">
           <span class="ar" id="heroArrow">◆</span>
-          <span id="heroChg">— · —%</span>
+          <span id="heroChg">—</span>
           <span style="color:var(--text-3);margin-left:4px">1D</span>
         </div>
         <div class="hero-strip">
-          <div class="hs-item">
-            <div class="hs-lbl">Signal</div>
-            <div class="hs-val gold" id="heroSig">—</div>
-          </div>
-          <div class="hs-item">
-            <div class="hs-lbl">Entry Prob</div>
-            <div class="hs-val gold" id="heroProb">—</div>
-          </div>
-          <div class="hs-item">
-            <div class="hs-lbl">Composite</div>
-            <div class="hs-val gold" id="heroComp">—</div>
-          </div>
-          <div class="hs-item">
-            <div class="hs-lbl">Regime</div>
-            <div class="hs-val muted" id="heroReg">—</div>
-          </div>
+          <div class="hs-item"><div class="hs-lbl">Signal</div><div class="hs-val gold" id="heroSig">—</div></div>
+          <div class="hs-item"><div class="hs-lbl">Entry Prob</div><div class="hs-val gold" id="heroProb">—</div></div>
+          <div class="hs-item"><div class="hs-lbl">Composite</div><div class="hs-val gold" id="heroComp">—</div></div>
+          <div class="hs-item"><div class="hs-lbl">Regime</div><div class="hs-val muted" id="heroReg">—</div></div>
         </div>
       </div>
       <div class="hero-r fi d2">
-        <div class="orb">
-          <svg class="orb-burst"><use href="#i-burst"/></svg>
+        <div class="orb-system">
           <div class="orb-glow"></div>
+          <div class="orbit r1">
+            <div class="coin c1"><svg><use href="#c-greek"/></svg><span class="coin-name">Greek Owl</span></div>
+            <div class="coin c2"><svg><use href="#c-roman"/></svg><span class="coin-name">Roman Aureus</span></div>
+            <div class="coin c3"><svg><use href="#c-british"/></svg><span class="coin-name">British Sovereign</span></div>
+          </div>
+          <div class="orbit r2">
+            <div class="coin c4"><svg><use href="#c-indian"/></svg><span class="coin-name">Indian Mohur</span></div>
+            <div class="coin c5"><svg><use href="#c-chinese"/></svg><span class="coin-name">Chinese Cash</span></div>
+            <div class="coin c6"><svg><use href="#c-spanish"/></svg><span class="coin-name">Spanish Doubloon</span></div>
+          </div>
           <div class="orb-sphere"></div>
         </div>
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════════
-         SIGNAL ENGINE
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d3">
       <span class="sec-num">01</span>
       <h2 class="sec-title">Signal Engine</h2>
@@ -1135,9 +889,6 @@ footer::before{
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         PROBABILITY BAR
-         ════════════════════════════════════════════════════ -->
     <div class="card probcard fi d4">
       <div class="prob-head">
         <span class="prob-title">Probability Spectrum · Live Conviction</span>
@@ -1149,9 +900,6 @@ footer::before{
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         GAUGE TRIO
-         ════════════════════════════════════════════════════ -->
     <div class="gauges fi d4">
       <div class="card gauge">
         <svg class="gauge-svg" viewBox="0 0 150 84">
@@ -1182,9 +930,6 @@ footer::before{
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         MACRO INTELLIGENCE — 8 cells
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d5">
       <span class="sec-num">02</span>
       <h2 class="sec-title">Macro Intelligence</h2>
@@ -1193,59 +938,16 @@ footer::before{
     </section>
 
     <div class="macro-grid fi d5">
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-vix"/></svg></div><span class="mc-name">VIX<br>Fear Index</span></div>
-        <div class="mc-val" id="mVix">—</div>
-        <div class="mc-desc">Volatility. Under 15 = calm. Over 30 = panic.</div>
-        <div class="mc-badge neut" id="bVix"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-dxy"/></svg></div><span class="mc-name">DXY<br>US Dollar</span></div>
-        <div class="mc-val" id="mDxy">—</div>
-        <div class="mc-desc">Strong dollar = gold headwind globally.</div>
-        <div class="mc-badge neut" id="bDxy"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-yield"/></svg></div><span class="mc-name">Real Yield<br>10-Year</span></div>
-        <div class="mc-val" id="mRy">—</div>
-        <div class="mc-desc">Negative real yields = bullish gold.</div>
-        <div class="mc-badge neut" id="bRy"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-cpi"/></svg></div><span class="mc-name">CPI<br>Inflation YoY</span></div>
-        <div class="mc-val" id="mCpi">—</div>
-        <div class="mc-desc">Higher inflation erodes cash. Gold rises.</div>
-        <div class="mc-badge neut" id="bCpi"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-curve"/></svg></div><span class="mc-name">Yield Curve<br>10Y - 2Y</span></div>
-        <div class="mc-val" id="mYc">—</div>
-        <div class="mc-desc">Negative = recession signal. Gold thrives.</div>
-        <div class="mc-badge neut" id="bYc"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-spread"/></svg></div><span class="mc-name">HY Spread<br>Credit Stress</span></div>
-        <div class="mc-val" id="mHy">—</div>
-        <div class="mc-desc">Rising spread = risk-off. Capital flees to gold.</div>
-        <div class="mc-badge neut" id="bHy"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-recession"/></svg></div><span class="mc-name">Recession<br>Probability</span></div>
-        <div class="mc-val" id="mRec">—</div>
-        <div class="mc-desc">Derived from yield curve + credit + VIX.</div>
-        <div class="mc-badge neut" id="bRec"><span class="mc-bullet"></span>—</div>
-      </div>
-      <div class="mcell">
-        <div class="mc-head"><div class="mc-ico"><svg><use href="#i-vol"/></svg></div><span class="mc-name">Gold Vol<br>Annualized</span></div>
-        <div class="mc-val" id="mVol">—</div>
-        <div class="mc-desc">30-day realized volatility on XAU/USD.</div>
-        <div class="mc-badge neut" id="bVol"><span class="mc-bullet"></span>—</div>
-      </div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-vix"/></svg></div><span class="mc-name">VIX<br>Fear Index</span></div><div class="mc-val" id="mVix">—</div><div class="mc-desc">Volatility. Under 15 = calm. Over 30 = panic.</div><div class="mc-badge neut" id="bVix"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-dxy"/></svg></div><span class="mc-name">DXY<br>US Dollar</span></div><div class="mc-val" id="mDxy">—</div><div class="mc-desc">Strong dollar = gold headwind globally.</div><div class="mc-badge neut" id="bDxy"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-yield"/></svg></div><span class="mc-name">Real Yield<br>10-Year</span></div><div class="mc-val" id="mRy">—</div><div class="mc-desc">Negative real yields = bullish gold.</div><div class="mc-badge neut" id="bRy"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-cpi"/></svg></div><span class="mc-name">CPI<br>Inflation YoY</span></div><div class="mc-val" id="mCpi">—</div><div class="mc-desc">Higher inflation erodes cash. Gold rises.</div><div class="mc-badge neut" id="bCpi"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-curve"/></svg></div><span class="mc-name">Yield Curve<br>10Y - 2Y</span></div><div class="mc-val" id="mYc">—</div><div class="mc-desc">Negative = recession signal. Gold thrives.</div><div class="mc-badge neut" id="bYc"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-spread"/></svg></div><span class="mc-name">HY Spread<br>Credit Stress</span></div><div class="mc-val" id="mHy">—</div><div class="mc-desc">Rising spread = risk-off. Capital flees to gold.</div><div class="mc-badge neut" id="bHy"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-recession"/></svg></div><span class="mc-name">Recession<br>Probability</span></div><div class="mc-val" id="mRec">—</div><div class="mc-desc">Derived from yield curve + credit + VIX.</div><div class="mc-badge neut" id="bRec"><span class="mc-bullet"></span>—</div></div>
+      <div class="mcell"><div class="mc-head"><div class="mc-ico"><svg><use href="#i-vol"/></svg></div><span class="mc-name">Gold Vol<br>Annualized</span></div><div class="mc-val" id="mVol">—</div><div class="mc-desc">30-day realized volatility on XAU/USD.</div><div class="mc-badge neut" id="bVol"><span class="mc-bullet"></span>—</div></div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         REGIME
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d6">
       <span class="sec-num">03</span>
       <h2 class="sec-title">Macro Regime</h2>
@@ -1266,9 +968,6 @@ footer::before{
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         PORTFOLIO ENGINE
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d7">
       <span class="sec-num">04</span>
       <h2 class="sec-title">Portfolio Engine</h2>
@@ -1280,46 +979,23 @@ footer::before{
       <div class="card port-card deploy">
         <div class="port-lbl"><span class="eng-lbl-dot"></span>Recommended Deployment</div>
         <div class="port-val" id="portDeploy">$—</div>
-        <div class="port-val-sub" id="portDeploySub">— % of monthly DCA · Kelly-sized</div>
+        <div class="port-val-sub" id="portDeploySub">— · Kelly-sized</div>
         <p class="port-cta">Of <strong>$500 CAD initial + $50/mo DCA</strong>. Half-Kelly sizing scaled by volatility, regime multiplier, and drawdown bonus.</p>
-        <div class="port-bar-wrap">
-          <div class="port-bar"><div class="port-bar-fill" id="portBar"></div></div>
-        </div>
-        <div class="port-stats">
-          <span>$0</span>
-          <span>$25</span>
-          <span>$50 monthly cap</span>
-        </div>
+        <div class="port-bar-wrap"><div class="port-bar"><div class="port-bar-fill" id="portBar"></div></div></div>
+        <div class="port-stats"><span>$0</span><span>$25</span><span>$50 monthly cap</span></div>
       </div>
       <div class="card port-card port-return">
         <div class="port-lbl"><span class="eng-lbl-dot"></span>Returns &amp; Reserves</div>
         <div class="pr-mini-grid">
-          <div>
-            <div class="pr-mini-lbl">Expected Return</div>
-            <div class="pr-mini-val green" id="prRet">—</div>
-          </div>
-          <div>
-            <div class="pr-mini-lbl">Cash Reserve</div>
-            <div class="pr-mini-val gold" id="prRes">—</div>
-          </div>
-          <div>
-            <div class="pr-mini-lbl">30d Vol</div>
-            <div class="pr-mini-val" id="prVol">—</div>
-          </div>
-          <div>
-            <div class="pr-mini-lbl">Drawdown 1Y</div>
-            <div class="pr-mini-val" id="prDD">—</div>
-          </div>
+          <div><div class="pr-mini-lbl">Expected Return</div><div class="pr-mini-val green" id="prRet">—</div></div>
+          <div><div class="pr-mini-lbl">Cash Reserve</div><div class="pr-mini-val gold" id="prRes">—</div></div>
+          <div><div class="pr-mini-lbl">30d Vol</div><div class="pr-mini-val" id="prVol">—</div></div>
+          <div><div class="pr-mini-lbl">Drawdown 1Y</div><div class="pr-mini-val" id="prDD">—</div></div>
         </div>
-        <div class="pr-note">
-          Half-Kelly with volatility scaling and drawdown bonus. ETFs: <strong>CGL.C</strong> (CAD monthly DCA) + <strong>ZGLD.U</strong> (USD lump on dips). Both TFSA-eligible on TSX.
-        </div>
+        <div class="pr-note">Half-Kelly with volatility scaling and drawdown bonus. ETFs: <strong>CGL.C</strong> (CAD monthly DCA) + <strong>ZGLD.U</strong> (USD lump on dips). Both TFSA-eligible on TSX.</div>
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         QUANT REASONING
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d8">
       <span class="sec-num">05</span>
       <h2 class="sec-title">Why This Signal</h2>
@@ -1328,27 +1004,12 @@ footer::before{
     </section>
 
     <div class="reasoning fi d8">
-      <div class="rc">
-        <div class="rc-head"><div class="rc-ico"><svg><use href="#i-signal"/></svg></div><div class="rc-title">Signal Logic</div></div>
-        <div class="rc-body" id="rSig">Loading reasoning…</div>
-      </div>
-      <div class="rc">
-        <div class="rc-head"><div class="rc-ico"><svg><use href="#i-globe"/></svg></div><div class="rc-title">Macro Environment</div></div>
-        <div class="rc-body" id="rMac">Loading reasoning…</div>
-      </div>
-      <div class="rc">
-        <div class="rc-head"><div class="rc-ico"><svg><use href="#i-chart"/></svg></div><div class="rc-title">Technical Setup</div></div>
-        <div class="rc-body" id="rTec">Loading reasoning…</div>
-      </div>
-      <div class="rc">
-        <div class="rc-head"><div class="rc-ico"><svg><use href="#i-shield"/></svg></div><div class="rc-title">Risk Framework</div></div>
-        <div class="rc-body" id="rRis">Loading reasoning…</div>
-      </div>
+      <div class="rc"><div class="rc-head"><div class="rc-ico"><svg><use href="#i-signal"/></svg></div><div class="rc-title">Signal Logic</div></div><div class="rc-body" id="rSig">Loading reasoning…</div></div>
+      <div class="rc"><div class="rc-head"><div class="rc-ico"><svg><use href="#i-globe"/></svg></div><div class="rc-title">Macro Environment</div></div><div class="rc-body" id="rMac">Loading reasoning…</div></div>
+      <div class="rc"><div class="rc-head"><div class="rc-ico"><svg><use href="#i-chart"/></svg></div><div class="rc-title">Technical Setup</div></div><div class="rc-body" id="rTec">Loading reasoning…</div></div>
+      <div class="rc"><div class="rc-head"><div class="rc-ico"><svg><use href="#i-shield"/></svg></div><div class="rc-title">Risk Framework</div></div><div class="rc-body" id="rRis">Loading reasoning…</div></div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════
-         PRICE CHART
-         ════════════════════════════════════════════════════ -->
     <section class="sec fi d8">
       <span class="sec-num">06</span>
       <h2 class="sec-title">Price History</h2>
@@ -1363,18 +1024,9 @@ footer::before{
           <div class="chart-sub" id="chartSub">Last 30 trading sessions</div>
         </div>
         <div class="chart-stats">
-          <div>
-            <div class="chart-stat-lbl">30D High</div>
-            <div class="chart-stat-val" id="chHigh">—</div>
-          </div>
-          <div>
-            <div class="chart-stat-lbl">30D Low</div>
-            <div class="chart-stat-val" id="chLow">—</div>
-          </div>
-          <div>
-            <div class="chart-stat-lbl">30D Change</div>
-            <div class="chart-stat-val" id="chChg">—</div>
-          </div>
+          <div><div class="chart-stat-lbl">30D High</div><div class="chart-stat-val" id="chHigh">—</div></div>
+          <div><div class="chart-stat-lbl">30D Low</div><div class="chart-stat-val" id="chLow">—</div></div>
+          <div><div class="chart-stat-lbl">30D Change</div><div class="chart-stat-val" id="chChg">—</div></div>
         </div>
       </div>
       <div class="chart-canvas"><canvas id="priceChart"></canvas></div>
@@ -1383,12 +1035,11 @@ footer::before{
   </main>
 
   <footer>
-    <div class="ft-brand">Gold Quant Terminal · v4.0</div>
+    <div class="ft-brand">Gold Quant Terminal · v5.0</div>
     <div class="ft-disc">A next-generation AI-powered gold macro intelligence terminal · Not financial advice · Engineered by Vignesh Shetty</div>
   </footer>
 </div>
 
-<!-- Toast notifications -->
 <div class="toast" id="toast" role="status" aria-live="polite">
   <span class="toast-ico" id="toastIco">●</span>
   <span id="toastMsg">—</span>
@@ -1396,29 +1047,39 @@ footer::before{
 
 <script>
 /* ════════════════════════════════════════════════════════
-   GOLD QUANT TERMINAL — v4.0 Frontend
-   Premium fintech UI · Cache-first · Animated
+   GOLD QUANT TERMINAL — v5.0 Frontend
+   Strict validation · Diagnostic UI · Theme support
    ════════════════════════════════════════════════════════ */
 (() => {
 'use strict';
 
 const API = 'https://script.google.com/macros/s/AKfycbyReXyUTuryNNjAPrWyT8_mPBvAPxViePSFY3L7yNSDOA1HPt9f6WfXOZrBYJFiZHkh5w/exec';
-const CACHE_KEY = 'gqt:v4:lastData';
-const CACHE_TS_KEY = 'gqt:v4:lastTs';
+const CACHE_KEY = 'gqt:v5:lastData';
+const CACHE_TS_KEY = 'gqt:v5:lastTs';
+const THEME_KEY = 'gqt:v5:theme';
 const REFRESH_MS = 5 * 60 * 1000;
-const STALE_MS  = 10 * 60 * 1000;
-const TIMEOUT_MS = 50000;
+const STALE_MS = 10 * 60 * 1000;
+const TIMEOUT_MS = 55000;
 
 let chartInst = null;
 let isFetching = false;
 let backoff = 0;
 let lastDataTs = 0;
 let lastDataObj = null;
+let retryTimer = null;
 
-/* ── Helpers ──────────────────────────────────────────── */
 const $ = id => document.getElementById(id);
 const setText = (id, val) => { const el = $(id); if (el) el.textContent = val; };
 
+/* ── Validation: a price MUST be > 0 to be considered valid ── */
+function isValidData(d) {
+  if (!d) return false;
+  const price = parseFloat(d.price);
+  if (!isFinite(price) || price <= 0) return false;
+  return true;
+}
+
+/* ── Number animation ── */
 function countTo(id, target, opts) {
   opts = opts || {};
   const el = $(id); if (!el) return;
@@ -1439,26 +1100,11 @@ function countTo(id, target, opts) {
   }
   requestAnimationFrame(step);
 }
+function setArc(id, pct) { const el = $(id); if (!el) return; const v = Math.min(Math.max(pct, 0), 100); setTimeout(() => el.style.strokeDashoffset = String(195 * (1 - v / 100)), 220); }
+function setRing(id, pct) { const el = $(id); if (!el) return; const v = Math.min(Math.max(pct, 0), 100); setTimeout(() => el.style.strokeDashoffset = String(553 * (1 - v / 100)), 220); }
+function setBar(id, pct) { const el = $(id); if (!el) return; const v = Math.min(Math.max(pct, 0), 100); setTimeout(() => el.style.width = v + '%', 220); }
 
-function setArc(id, pct) {
-  const el = $(id); if (!el) return;
-  const len = 195;
-  const v = Math.min(Math.max(pct, 0), 100);
-  setTimeout(() => { el.style.strokeDashoffset = String(len * (1 - v / 100)); }, 220);
-}
-function setRing(id, pct) {
-  const el = $(id); if (!el) return;
-  const len = 553;
-  const v = Math.min(Math.max(pct, 0), 100);
-  setTimeout(() => { el.style.strokeDashoffset = String(len * (1 - v / 100)); }, 220);
-}
-function setBar(id, pct) {
-  const el = $(id); if (!el) return;
-  const v = Math.min(Math.max(pct, 0), 100);
-  setTimeout(() => { el.style.width = v + '%'; }, 220);
-}
-
-/* ── Toast ──────────────────────────────────────────── */
+/* ── Toast ── */
 let toastTmr = null;
 function toast(msg, type) {
   const t = $('toast'), m = $('toastMsg'), i = $('toastIco');
@@ -1471,56 +1117,43 @@ function toast(msg, type) {
   toastTmr = setTimeout(() => t.classList.remove('show'), 4500);
 }
 
-/* ── Status pill ──────────────────────────────────────── */
+/* ── Status pill ── */
 function setStatus(mode, label) {
   const p = $('statusPill'); if (!p) return;
-  p.classList.remove('stale', 'err');
-  if (mode === 'stale') p.classList.add('stale');
-  else if (mode === 'err') p.classList.add('err');
-  setText('statusLabel', label || (mode === 'err' ? 'Offline' : mode === 'stale' ? 'Stale' : 'Live'));
+  p.classList.remove('stale', 'err', 'fetching');
+  if (mode) p.classList.add(mode === 'live' ? '' : mode);
+  setText('statusLabel', label || (mode === 'err' ? 'Offline' : mode === 'stale' ? 'Stale' : mode === 'fetching' ? 'Loading' : 'Live'));
 }
 
-/* ── Regime metadata ──────────────────────────────────── */
-const REGIME = {
-  STAGFLATION: {
-    color:'#f87171', glow:'rgba(248,113,113,.18)', mult:'1.00×',
-    desc:'High inflation + slowing growth — the most gold-bullish environment in history. Central banks are trapped: raising rates hurts the economy, staying put fuels inflation. Gold thrives as the ultimate store of value.'
-  },
-  BULLISH_DISINFLATION: {
-    color:'#4ade80', glow:'rgba(74,222,128,.18)', mult:'0.85×',
-    desc:'Falling inflation with decent growth. Risk assets lead, but gold remains a smart portfolio hedge. A steady DCA window — accumulate gradually without urgency.'
-  },
-  REFLATION: {
-    color:'#f5b338', glow:'rgba(245,179,56,.20)', mult:'0.75×',
-    desc:'Rising growth + rising inflation after a downturn. Commodities and real assets surge. Gold benefits from early-cycle inflation expectations — a strong accumulation window.'
-  },
-  RISK_OFF_CRISIS: {
-    color:'#f87171', glow:'rgba(248,113,113,.20)', mult:'0.55×',
-    desc:'Market panic, credit stress, or systemic risk. Gold acts as the ultimate safe haven — flight-to-quality demand drives prices sharply higher. This is where gold earns its premium.'
-  },
-  NEUTRAL: {
-    color:'#ffd87a', glow:'rgba(245,179,56,.14)', mult:'0.45×',
-    desc:'Mixed macro signals. No strong directional catalyst. Maintain steady monthly DCA but deploy capital gradually. The engine watches for a regime shift to trigger aggressive entry.'
-  },
-  HAWKISH_TIGHTENING: {
-    color:'#60a5fa', glow:'rgba(96,165,250,.14)', mult:'0.15×',
-    desc:"Fed aggressively raising rates — real yields rising, gold's biggest headwind. Capital rotates to bonds. Maintain minimum DCA only. Wait for the rate-cut pivot signal."
-  }
-};
+/* ── Diagnostic banner ── */
+function showDiag(message, actionLabel, actionFn) {
+  const d = $('diag'), m = $('diagMsg'), a = $('diagAct');
+  if (!d) return;
+  while (m.firstChild) m.removeChild(m.firstChild);
+  if (typeof message === 'string') m.textContent = message;
+  else if (message && message.nodes) message.nodes.forEach(n => m.appendChild(n));
+  a.textContent = actionLabel || 'Retry';
+  a.onclick = actionFn || (() => fetchData(true));
+  d.classList.add('show');
+}
+function hideDiag() { const d = $('diag'); if (d) d.classList.remove('show'); }
 
+/* ── Regime metadata ── */
+const REGIME = {
+  STAGFLATION:{color:'#f87171',glow:'rgba(248,113,113,.18)',mult:'1.00×',desc:'High inflation + slowing growth — the most gold-bullish environment in history. Central banks are trapped: raising rates hurts the economy, staying put fuels inflation. Gold thrives as the ultimate store of value.'},
+  BULLISH_DISINFLATION:{color:'#4ade80',glow:'rgba(74,222,128,.18)',mult:'0.85×',desc:'Falling inflation with decent growth. Risk assets lead, but gold remains a smart portfolio hedge. A steady DCA window — accumulate gradually without urgency.'},
+  REFLATION:{color:'#f5b338',glow:'rgba(245,179,56,.20)',mult:'0.75×',desc:'Rising growth + rising inflation after a downturn. Commodities and real assets surge. Gold benefits from early-cycle inflation expectations — a strong accumulation window.'},
+  RISK_OFF_CRISIS:{color:'#f87171',glow:'rgba(248,113,113,.20)',mult:'0.55×',desc:'Market panic, credit stress, or systemic risk. Gold acts as the ultimate safe haven — flight-to-quality demand drives prices sharply higher. This is where gold earns its premium.'},
+  NEUTRAL:{color:'#ffd87a',glow:'rgba(245,179,56,.14)',mult:'0.45×',desc:'Mixed macro signals. No strong directional catalyst. Maintain steady monthly DCA but deploy capital gradually. The engine watches for a regime shift to trigger aggressive entry.'},
+  HAWKISH_TIGHTENING:{color:'#60a5fa',glow:'rgba(96,165,250,.14)',mult:'0.15×',desc:"Fed aggressively raising rates — real yields rising, gold's biggest headwind. Capital rotates to bonds. Maintain minimum DCA only. Wait for the rate-cut pivot signal."}
+};
 const SIG_DESC = {
   STRONG_BUY:'Deploy maximum capital. Macro + technical signals fully aligned for a high-conviction entry.',
   BUY:'Favourable conditions detected. Deploy your full DCA allocation with confidence.',
   HOLD:'Mixed signals. Maintain steady monthly DCA only. No rush to add aggressively.',
   WAIT:'Conditions unfavourable. Preserve cash. Wait for a better macro entry point.'
 };
-
-const SIG_SUB = {
-  STRONG_BUY:'High Conviction',
-  BUY:'Standard Entry',
-  HOLD:'Bayesian Confidence',
-  WAIT:'Low Conviction'
-};
+const SIG_SUB = { STRONG_BUY:'High Conviction', BUY:'Standard Entry', HOLD:'Bayesian Confidence', WAIT:'Low Conviction' };
 
 function badgeFor(name, v) {
   if (name === 'vix') return v < 15 ? ['bull','Calm'] : v < 25 ? ['neut','Moderate'] : ['bear','Fear'];
@@ -1533,7 +1166,6 @@ function badgeFor(name, v) {
   if (name === 'vol') return v > 25 ? ['bull','High'] : v > 15 ? ['neut','Normal'] : ['bear','Quiet'];
   return ['neut','—'];
 }
-
 function setBadge(id, cls, text) {
   const el = $(id); if (!el) return;
   el.className = 'mc-badge ' + cls;
@@ -1544,7 +1176,6 @@ function setBadge(id, cls, text) {
   el.appendChild(document.createTextNode(text));
 }
 
-/* ── Signal styling ──────────────────────────────────── */
 function styleSignal(id, sig) {
   const el = $(id); if (!el) return;
   el.textContent = sig ? sig.replace(/_/g,' ') : '—';
@@ -1564,7 +1195,6 @@ function styleEngineSignal(sig) {
   else el.classList.add('wait');
 }
 
-/* ── Recession probability (derived) ──────────────────── */
 function recessionProb(yc, hy, vix) {
   const ycPart = Math.max(0, -yc) * 35;
   const hyPart = Math.max(0, hy - 3.5) * 10;
@@ -1572,29 +1202,29 @@ function recessionProb(yc, hy, vix) {
   return Math.min(100, Math.max(0, ycPart + hyPart + vixPart));
 }
 
-/* ── Ticker tape ───────────────────────────────────── */
+/* ── Ticker ── */
 function renderTicker(d) {
   const t = $('tickerTrack'); if (!t) return;
-  const items = [
-    { lbl:'XAU/USD',     val:'$'+(d.price||0).toFixed(2),     chg: d.deltaPct },
-    { lbl:'SIGNAL',      val:(d.signal||'—').replace(/_/g,' '), chg:null },
-    { lbl:'COMPOSITE',   val:((d.composite||0)*100).toFixed(1)+'%', chg:null },
-    { lbl:'P(ENTRY)',    val:(d.pEntry||0).toFixed(1)+'%', chg:null },
-    { lbl:'VIX',         val:(d.vix||0).toFixed(1), chg:null },
-    { lbl:'DXY',         val:(d.dxy||0).toFixed(1), chg:null },
-    { lbl:'REAL YIELD',  val:(d.realYield||0).toFixed(2)+'%', chg:null },
-    { lbl:'CPI YoY',     val:(d.cpiYoY||0).toFixed(1)+'%', chg:null },
-    { lbl:'10Y-2Y',      val:(d.yieldCurve||0).toFixed(2)+'%', chg:null },
-    { lbl:'HY SPREAD',   val:(d.hySpread||0).toFixed(2)+'%', chg:null },
-    { lbl:'GOLD VOL',    val:(d.vol||0).toFixed(1)+'%', chg:null },
-    { lbl:'REGIME',      val:(d.regime||'—').replace(/_/g,' '), chg:null }
-  ];
+  const valid = isValidData(d);
+  const items = valid ? [
+    { lbl:'XAU/USD', val:'$'+(d.price||0).toFixed(2), chg: d.deltaPct },
+    { lbl:'SIGNAL', val:(d.signal||'—').replace(/_/g,' '), chg:null },
+    { lbl:'COMPOSITE', val:((d.composite||0)*100).toFixed(1)+'%', chg:null },
+    { lbl:'P(ENTRY)', val:(d.pEntry||0).toFixed(1)+'%', chg:null },
+    { lbl:'VIX', val:(d.vix||0).toFixed(1), chg:null },
+    { lbl:'DXY', val:(d.dxy||0).toFixed(1), chg:null },
+    { lbl:'REAL YIELD', val:(d.realYield||0).toFixed(2)+'%', chg:null },
+    { lbl:'CPI YoY', val:(d.cpiYoY||0).toFixed(1)+'%', chg:null },
+    { lbl:'10Y-2Y', val:(d.yieldCurve||0).toFixed(2)+'%', chg:null },
+    { lbl:'HY SPREAD', val:(d.hySpread||0).toFixed(2)+'%', chg:null },
+    { lbl:'GOLD VOL', val:(d.vol||0).toFixed(1)+'%', chg:null },
+    { lbl:'REGIME', val:(d.regime||'—').replace(/_/g,' '), chg:null }
+  ] : ['XAU/USD','SIGNAL','COMPOSITE','P(ENTRY)','VIX','DXY','REAL YIELD','CPI YoY','10Y-2Y','HY SPREAD','GOLD VOL','REGIME'].map(l => ({lbl:l, val:'—', chg:null}));
+
   while (t.firstChild) t.removeChild(t.firstChild);
-  // Duplicate set for seamless loop
   for (let pass = 0; pass < 2; pass++) {
     items.forEach(item => {
-      const wrap = document.createElement('div');
-      wrap.className = 'tk-item';
+      const wrap = document.createElement('div'); wrap.className = 'tk-item';
       const lbl = document.createElement('span'); lbl.className = 'tk-lbl'; lbl.textContent = item.lbl;
       const val = document.createElement('span'); val.className = 'tk-val'; val.textContent = item.val;
       wrap.appendChild(lbl); wrap.appendChild(val);
@@ -1611,18 +1241,25 @@ function renderTicker(d) {
   }
 }
 
-/* ── Main render ──────────────────────────────────── */
+/* ── Render (strict — never renders bad data) ── */
 function render(d, opts) {
   opts = opts || {};
   const animate = opts.animate !== false;
+
+  if (!isValidData(d)) {
+    console.warn('[GoldQuant] render() called with invalid data — skipping. price=', d ? d.price : null);
+    return false;
+  }
   lastDataObj = d;
 
   /* Hero price */
-  const price = parseFloat(d.price) || 0;
+  const price = parseFloat(d.price);
   const intPart = Math.floor(price);
   const decPart = (price - intPart);
   const intEl = $('heroPriceInt');
   const decEl = $('heroPriceDec');
+  const wrap = $('heroPriceWrap');
+  if (wrap) wrap.classList.remove('loading');
   if (animate && intEl) {
     countTo('heroPriceInt', intPart, { dec:0, dur:1400 });
     setTimeout(() => { if (decEl) decEl.textContent = '.' + decPart.toFixed(2).slice(2); }, 1400);
@@ -1632,17 +1269,24 @@ function render(d, opts) {
   }
 
   /* Hero delta */
+  const delta = $('heroDelta');
   let deltaPct = 0;
   if (d.history && d.history.length >= 2) {
-    const prev = parseFloat(d.history[d.history.length - 2].price) || price;
-    const chg = price - prev;
-    deltaPct = prev ? (chg / prev) * 100 : 0;
-    const arrow = chg > 0.05 ? '▲' : chg < -0.05 ? '▼' : '◆';
-    const cls = chg > 0.05 ? 'up' : chg < -0.05 ? 'dn' : 'flat';
-    setText('heroArrow', arrow);
-    setText('heroChg', (chg >= 0 ? '+$' : '-$') + Math.abs(chg).toFixed(2) + ' · ' + (deltaPct >= 0 ? '+' : '') + deltaPct.toFixed(2) + '%');
-    const delta = $('heroDelta'); if (delta) delta.className = 'hero-delta ' + cls;
-    d.deltaPct = deltaPct;
+    const prev = parseFloat(d.history[d.history.length - 2].price) || 0;
+    if (prev > 0) {
+      const chg = price - prev;
+      deltaPct = (chg / prev) * 100;
+      const arrow = chg > 0.05 ? '▲' : chg < -0.05 ? '▼' : '◆';
+      const cls = chg > 0.05 ? 'up' : chg < -0.05 ? 'dn' : 'flat';
+      setText('heroArrow', arrow);
+      setText('heroChg', (chg >= 0 ? '+$' : '-$') + Math.abs(chg).toFixed(2) + ' · ' + (deltaPct >= 0 ? '+' : '') + deltaPct.toFixed(2) + '%');
+      if (delta) delta.className = 'hero-delta ' + cls;
+      d.deltaPct = deltaPct;
+    } else {
+      if (delta) delta.className = 'hero-delta flat hidden';
+    }
+  } else {
+    if (delta) delta.className = 'hero-delta flat hidden';
   }
 
   styleSignal('heroSig', d.signal);
@@ -1650,28 +1294,21 @@ function render(d, opts) {
   setText('heroComp', ((d.composite || 0) * 100).toFixed(1) + '%');
   setText('heroReg', (d.regime || '—').replace(/_/g,' '));
 
-  /* Engine card */
   styleEngineSignal(d.signal);
   setText('engineDesc', SIG_DESC[d.signal] || 'Monitoring conditions...');
   setText('probRingSub', SIG_SUB[d.signal] || 'Bayesian Confidence');
 
-  /* Probability ring */
   const prob = d.pEntry || 0;
   setRing('probRingFg', prob);
   if (animate) countTo('probRingV', prob, { dec:1, dur:1400 });
   else setText('probRingV', prob.toFixed(1));
-
-  /* Probability bar */
   setText('probVal', prob.toFixed(1) + '%');
   setBar('probFill', prob);
 
-  /* Gauges */
   const ms = (d.macroScore || 0) * 100;
-  const ts = (d.techScore  || 0) * 100;
-  const cs = (d.composite  || 0) * 100;
-  setArc('gMacroArc', ms);
-  setArc('gCompArc', cs);
-  setArc('gTechArc', ts);
+  const ts = (d.techScore || 0) * 100;
+  const cs = (d.composite || 0) * 100;
+  setArc('gMacroArc', ms); setArc('gCompArc', cs); setArc('gTechArc', ts);
   if (animate) {
     countTo('gMacroVal', ms, { suf:'%', dec:0, dur:1400 });
     countTo('gCompVal',  cs, { suf:'%', dec:0, dur:1600 });
@@ -1682,80 +1319,50 @@ function render(d, opts) {
     setText('gTechVal',  ts.toFixed(0) + '%');
   }
 
-  /* Macro grid */
   const vix = d.vix || 0, dxy = d.dxy || 0, ry = d.realYield || 0;
   const cpi = d.cpiYoY || 0, yc = d.yieldCurve || 0, hy = d.hySpread || 0;
   const vol = d.vol || 0;
   const rec = recessionProb(yc, hy, vix);
   setText('mVix', vix.toFixed(1));
   setText('mDxy', dxy.toFixed(1));
-  setText('mRy',  ry.toFixed(2) + '%');
+  setText('mRy', ry.toFixed(2) + '%');
   setText('mCpi', cpi.toFixed(1) + '%');
-  setText('mYc',  yc.toFixed(2) + '%');
-  setText('mHy',  hy.toFixed(2) + '%');
+  setText('mYc', yc.toFixed(2) + '%');
+  setText('mHy', hy.toFixed(2) + '%');
   setText('mRec', rec.toFixed(0) + '%');
   setText('mVol', vol.toFixed(1) + '%');
-  const bv = badgeFor('vix', vix); setBadge('bVix', bv[0], bv[1]);
-  const bd = badgeFor('dxy', dxy); setBadge('bDxy', bd[0], bd[1]);
-  const br = badgeFor('ry',  ry ); setBadge('bRy',  br[0], br[1]);
-  const bc = badgeFor('cpi', cpi); setBadge('bCpi', bc[0], bc[1]);
-  const by = badgeFor('yc',  yc ); setBadge('bYc',  by[0], by[1]);
-  const bh = badgeFor('hy',  hy ); setBadge('bHy',  bh[0], bh[1]);
+  ['vix','dxy','ry','cpi','yc','hy'].forEach((n,i) => {
+    const vals = [vix,dxy,ry,cpi,yc,hy];
+    const ids = ['bVix','bDxy','bRy','bCpi','bYc','bHy'];
+    const b = badgeFor(n, vals[i]); setBadge(ids[i], b[0], b[1]);
+  });
   const brc = badgeFor('rec', rec); setBadge('bRec', brc[0], brc[1]);
   const bvl = badgeFor('vol', vol); setBadge('bVol', bvl[0], bvl[1]);
 
-  /* Regime */
   const reg = d.regime || 'NEUTRAL';
   const ri = REGIME[reg] || REGIME.NEUTRAL;
   const rc = $('regimeCard');
-  if (rc) {
-    rc.style.setProperty('--regime-dot', ri.color);
-    rc.style.setProperty('--regime-glow', ri.glow);
-  }
+  if (rc) { rc.style.setProperty('--regime-dot', ri.color); rc.style.setProperty('--regime-glow', ri.glow); }
   setText('regName', reg.replace(/_/g,' '));
   setText('regMult', ri.mult);
   setText('regDesc', ri.desc);
 
-  /* Portfolio */
-  const dep = d.deployCAD || 0;
-  const res = d.reserve || 500;
-  const ret = d.expReturn || 0;
-  const dd  = d.drawdown || 0;
+  const dep = d.deployCAD || 0, res = d.reserve || 500;
+  const ret = d.expReturn || 0, dd = d.drawdown || 0;
   setText('portDeploy', '$' + dep + ' CAD');
   setText('portDeploySub', ((dep / 50) * 100).toFixed(0) + '% of monthly DCA · Kelly-sized');
   setBar('portBar', Math.min((dep / 50) * 100, 100));
   setText('prRet', (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%');
   setText('prRes', '$' + res);
   setText('prVol', vol.toFixed(1) + '%');
-  setText('prDD',  dd.toFixed(1) + '%');
+  setText('prDD', dd.toFixed(1) + '%');
 
-  /* Reasoning */
   const rsi = d.rsi || 50, zs = d.zScore || 0;
-  setText('rSig',
-    'Entry probability ' + prob.toFixed(1) + '% via Bayesian sigmoid on a ' + cs.toFixed(1) + '% composite score. ' +
-    (prob >= 65 ? 'All systems aligned — aggressive entry warranted.' :
-     prob >= 50 ? 'Standard BUY conditions met — deploy full DCA.' :
-     prob >= 35 ? 'Mixed signals — DCA only, no lump-sum additions.' :
-     'Patience rewarded here. Hold cash and wait for better entry.')
-  );
-  setText('rMac',
-    'Regime: ' + reg.replace(/_/g,' ') + '. Real yield ' + ry.toFixed(2) + '% ' +
-    (ry < 0 ? '(gold-bullish)' : '(headwind)') +
-    '. CPI ' + cpi.toFixed(1) + '% YoY. DXY ' + dxy.toFixed(1) + '. VIX ' + vix.toFixed(1) + '.'
-  );
-  setText('rTec',
-    'RSI ' + rsi.toFixed(1) + ' ' +
-    (rsi < 40 ? '(oversold — buy zone)' : rsi > 70 ? '(overbought — caution)' : '(neutral)') +
-    '. Price Z-score vs 90-day: ' + zs.toFixed(2) + 'σ. ' +
-    (Math.abs(zs) > 2 ? 'Significant deviation — mean reversion likely.' : 'Price near historical average.')
-  );
-  setText('rRis',
-    'Half-Kelly sizing with vol scaling. 30-day vol: ' + vol.toFixed(1) + '%. ' +
-    'Expected return: ' + (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%. ' +
-    'Reserve: $' + res + ' USD maintained. CGL.C (CAD DCA) + ZGLD.U (USD lump on dips).'
-  );
+  setText('rSig', 'Entry probability ' + prob.toFixed(1) + '% via Bayesian sigmoid on a ' + cs.toFixed(1) + '% composite score. ' + (prob >= 65 ? 'All systems aligned — aggressive entry warranted.' : prob >= 50 ? 'Standard BUY conditions met — deploy full DCA.' : prob >= 35 ? 'Mixed signals — DCA only, no lump-sum additions.' : 'Patience rewarded here. Hold cash and wait for better entry.'));
+  setText('rMac', 'Regime: ' + reg.replace(/_/g,' ') + '. Real yield ' + ry.toFixed(2) + '% ' + (ry < 0 ? '(gold-bullish)' : '(headwind)') + '. CPI ' + cpi.toFixed(1) + '% YoY. DXY ' + dxy.toFixed(1) + '. VIX ' + vix.toFixed(1) + '.');
+  setText('rTec', 'RSI ' + rsi.toFixed(1) + ' ' + (rsi < 40 ? '(oversold — buy zone)' : rsi > 70 ? '(overbought — caution)' : '(neutral)') + '. Price Z-score vs 90-day: ' + zs.toFixed(2) + 'σ. ' + (Math.abs(zs) > 2 ? 'Significant deviation — mean reversion likely.' : 'Price near historical average.'));
+  setText('rRis', 'Half-Kelly sizing with vol scaling. 30-day vol: ' + vol.toFixed(1) + '%. Expected return: ' + (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%. Reserve: $' + res + ' USD maintained. CGL.C (CAD DCA) + ZGLD.U (USD lump on dips).');
 
-  /* Chart stats */
   if (d.history && d.history.length) {
     const prices = d.history.map(h => parseFloat(h.price) || 0).filter(p => p > 0);
     if (prices.length) {
@@ -1765,7 +1372,7 @@ function render(d, opts) {
       const chg = price - first;
       const chgPct = first ? (chg / first) * 100 : 0;
       setText('chHigh', '$' + hi.toFixed(2));
-      setText('chLow',  '$' + lo.toFixed(2));
+      setText('chLow', '$' + lo.toFixed(2));
       const chEl = $('chChg');
       if (chEl) {
         chEl.textContent = (chg >= 0 ? '+' : '') + chgPct.toFixed(2) + '%';
@@ -1775,140 +1382,161 @@ function render(d, opts) {
     renderChart(d.history);
   }
 
-  /* Ticker */
   renderTicker(d);
+  return true;
 }
 
-/* ── Chart ─────────────────────────────────────────── */
+/* ── Chart ── */
 function renderChart(history) {
   const ctx = $('priceChart');
   if (!ctx || typeof Chart === 'undefined') return;
   const labels = history.map(h => h.date || '');
   const prices = history.map(h => parseFloat(h.price) || 0);
-
   if (chartInst) { chartInst.destroy(); chartInst = null; }
-
+  const isLight = document.documentElement.dataset.theme === 'light';
   chartInst = new Chart(ctx, {
     type:'line',
-    data:{
-      labels,
-      datasets:[{
-        label:'Gold (USD/oz)',
-        data: prices,
-        borderColor:'#ffd87a',
-        borderWidth: 2,
-        pointRadius: 0,
-        pointHoverRadius: 6,
-        pointHoverBackgroundColor:'#fef3c7',
-        pointHoverBorderColor:'#0a0a0c',
-        pointHoverBorderWidth: 2,
-        fill: true,
-        backgroundColor: c => {
-          const g = c.chart.ctx.createLinearGradient(0, 0, 0, c.chart.height || 280);
-          g.addColorStop(0, 'rgba(255,216,122,.30)');
-          g.addColorStop(.55, 'rgba(245,179,56,.08)');
-          g.addColorStop(1, 'rgba(245,179,56,0)');
-          return g;
-        },
-        tension: .42
-      }]
-    },
+    data:{labels,datasets:[{
+      label:'Gold (USD/oz)',data:prices,
+      borderColor: isLight ? '#c98a1a' : '#ffd87a',
+      borderWidth:2,
+      pointRadius:0,pointHoverRadius:6,
+      pointHoverBackgroundColor: isLight ? '#8a5e0c' : '#fef3c7',
+      pointHoverBorderColor: isLight ? '#fffbf2' : '#0a0a0c',
+      pointHoverBorderWidth:2,
+      fill:true,
+      backgroundColor:c=>{
+        const g=c.chart.ctx.createLinearGradient(0,0,0,c.chart.height||280);
+        g.addColorStop(0, isLight?'rgba(201,138,26,.22)':'rgba(255,216,122,.30)');
+        g.addColorStop(.55, isLight?'rgba(201,138,26,.06)':'rgba(245,179,56,.08)');
+        g.addColorStop(1, 'rgba(245,179,56,0)');
+        return g;
+      },tension:.42
+    }]},
     options:{
-      responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:'index', intersect:false },
-      animation:{ duration: 1400, easing:'easeOutCubic' },
-      plugins:{
-        legend:{ display:false },
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      animation:{duration:1400,easing:'easeOutCubic'},
+      plugins:{legend:{display:false},
         tooltip:{
-          backgroundColor:'rgba(15,15,20,.96)',
-          borderColor:'rgba(245,179,56,.35)',
-          borderWidth: 1,
-          titleColor:'#ffe9b3',
-          bodyColor:'#f5ebd6',
-          titleFont:{ family:'JetBrains Mono', size:11, weight:'500' },
-          bodyFont:{ family:'JetBrains Mono', size:13, weight:'500' },
-          padding: 14,
-          cornerRadius: 10,
-          displayColors: false,
-          callbacks:{ label: c => '  $' + c.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) }
+          backgroundColor: isLight?'rgba(255,251,242,.98)':'rgba(15,15,20,.96)',
+          borderColor:'rgba(245,179,56,.35)',borderWidth:1,
+          titleColor: isLight?'#5a3a06':'#ffe9b3',
+          bodyColor: isLight?'#1a1410':'#f5ebd6',
+          titleFont:{family:'JetBrains Mono',size:11,weight:'500'},
+          bodyFont:{family:'JetBrains Mono',size:13,weight:'500'},
+          padding:14,cornerRadius:10,displayColors:false,
+          callbacks:{label:c=>'  $'+c.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
         }
       },
       scales:{
-        x:{
-          grid:{ color:'rgba(245,235,214,.025)', drawTicks:false },
-          ticks:{ color:'rgba(168,161,149,.6)', maxTicksLimit: 7, font:{ size:10, family:'JetBrains Mono' }, padding: 10 },
-          border:{ display:false }
-        },
-        y:{
-          grid:{ color:'rgba(245,235,214,.025)', drawTicks:false },
-          ticks:{ color:'rgba(168,161,149,.6)', font:{ size:10, family:'JetBrains Mono' }, padding: 10, callback: v => '$' + v.toLocaleString() },
-          border:{ display:false }
-        }
+        x:{grid:{color:isLight?'rgba(26,20,16,.05)':'rgba(245,235,214,.025)',drawTicks:false},
+           ticks:{color:isLight?'rgba(94,86,76,.7)':'rgba(168,161,149,.6)',maxTicksLimit:7,font:{size:10,family:'JetBrains Mono'},padding:10},
+           border:{display:false}},
+        y:{grid:{color:isLight?'rgba(26,20,16,.05)':'rgba(245,235,214,.025)',drawTicks:false},
+           ticks:{color:isLight?'rgba(94,86,76,.7)':'rgba(168,161,149,.6)',font:{size:10,family:'JetBrains Mono'},padding:10,callback:v=>'$'+v.toLocaleString()},
+           border:{display:false}}
       }
     }
   });
 }
 
-/* ── Cache ─────────────────────────────────────── */
+/* ── Cache (strict — never persists invalid data) ── */
 function loadCache() {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
-    const ts  = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0', 10);
+    const ts = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0', 10);
     if (!raw) return null;
-    return { data: JSON.parse(raw), ts };
+    const data = JSON.parse(raw);
+    if (!isValidData(data)) {
+      console.warn('[GoldQuant] Cached data invalid (price≤0). Clearing cache.');
+      localStorage.removeItem(CACHE_KEY);
+      localStorage.removeItem(CACHE_TS_KEY);
+      return null;
+    }
+    return { data, ts };
   } catch (e) { return null; }
 }
 function saveCache(data) {
+  if (!isValidData(data)) {
+    console.warn('[GoldQuant] saveCache rejected — invalid data. price=', data ? data.price : null);
+    return false;
+  }
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify(data));
     localStorage.setItem(CACHE_TS_KEY, String(Date.now()));
-  } catch (e) {}
+    return true;
+  } catch (e) { return false; }
 }
 function fmtTime(ts) {
   if (!ts) return '—';
-  try { return 'Updated ' + new Date(ts).toLocaleTimeString('en-CA',{hour:'2-digit', minute:'2-digit'}); }
+  try { return 'Updated ' + new Date(ts).toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'}); }
   catch (e) { return '—'; }
 }
 
-/* ── Fetch ────────────────────────────────────────── */
-async function fetchData() {
+/* ── Fetch with strict validation ── */
+async function fetchData(manualRetry) {
   if (isFetching) return;
+  if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
   isFetching = true;
+  setStatus('fetching', 'Fetching');
   const ctrl = new AbortController();
   const tmr = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(API, { signal: ctrl.signal, cache:'no-store' });
+    const res = await fetch(API + '?_t=' + Date.now(), { signal: ctrl.signal, cache:'no-store', redirect:'follow' });
     clearTimeout(tmr);
-    if (!res.ok) throw new Error('Server ' + res.status);
-    const d = await res.json();
-    if (!d.ok) throw new Error(d.error || 'Engine error');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    let d;
+    try { d = JSON.parse(text); }
+    catch (pe) {
+      // Likely HTML login redirect — Apps Script not deployed as "Anyone"
+      throw new Error('Apps Script returned HTML, not JSON. Re-deploy as "Anyone" access.');
+    }
+    if (!d.ok) throw new Error(d.error || 'Engine returned error');
+    if (!isValidData(d)) throw new Error('Engine returned price=0 (Yahoo Finance may be down)');
+
     lastDataTs = Date.now();
     saveCache(d);
     render(d, { animate:true });
     setStatus('live', 'Live');
     setText('updMeta', fmtTime(lastDataTs));
+    hideDiag();
     backoff = 0;
-    if (!sessionStorage.getItem('gqt:welcomed')) {
+    if (manualRetry) toast('Refreshed successfully', 'ok');
+    else if (!sessionStorage.getItem('gqt:welcomed')) {
       toast('Live macro data loaded', 'ok');
       sessionStorage.setItem('gqt:welcomed','1');
     }
   } catch (e) {
+    console.error('[GoldQuant] fetch failed:', e);
     const isTimeout = e.name === 'AbortError';
-    const msg = isTimeout ? 'Apps Script warming up — retrying' : 'Connection issue — showing cached';
-    if (loadCache()) setStatus('stale', 'Stale');
+    const isHTML = /HTML/i.test(e.message);
+    const isPrice = /price=0/i.test(e.message);
+    const cached = loadCache();
+    if (cached) setStatus('stale', 'Stale');
     else setStatus('err', 'Offline');
-    toast(msg, 'err');
-    backoff = Math.min((backoff || 1) * 2, 8);
-    setTimeout(fetchData, 15000 * backoff);
+    if (isHTML) {
+      showDiag('Apps Script needs re-deployment. Open Apps Script → Deploy → Manage deployments → New deployment → Web app → Access: Anyone → Deploy.', 'Open Apps Script', () => window.open('https://script.google.com/home', '_blank'));
+    } else if (isPrice) {
+      showDiag('Yahoo Finance returned no price. Apps Script reached but data feed empty. Retry in 30 seconds, or check Apps Script logs.', 'Retry now', () => fetchData(true));
+    } else if (isTimeout) {
+      showDiag('Apps Script timed out after 55s. First-load cold-start can take 60s+. Wait and retry.', 'Retry now', () => fetchData(true));
+    } else {
+      showDiag('Connection failed: ' + e.message + '. Check internet or Apps Script URL.', 'Retry now', () => fetchData(true));
+    }
+    if (!manualRetry) {
+      backoff = Math.min((backoff || 1) * 2, 8);
+      retryTimer = setTimeout(() => fetchData(false), 15000 * backoff);
+    }
   } finally {
     isFetching = false;
   }
 }
 
-/* ── Particles ──────────────────────────────────── */
+/* ── Particles ── */
 function initParticles() {
-  const cv = $('particles');
-  if (!cv) return;
+  const cv = $('particles'); if (!cv) return;
   const cx = cv.getContext('2d');
   const pts = [];
   const COUNT = window.innerWidth < 640 ? 22 : 50;
@@ -1916,27 +1544,22 @@ function initParticles() {
   resize();
   addEventListener('resize', resize, { passive:true });
   for (let i = 0; i < COUNT; i++) {
-    pts.push({
-      x: Math.random() * innerWidth,
-      y: Math.random() * innerHeight,
-      vx: (Math.random() - .5) * .22,
-      vy: (Math.random() - .5) * .22,
-      r: Math.random() * 1.5 + .4,
-      t: Math.random() * Math.PI * 2
-    });
+    pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.5+.4,t:Math.random()*Math.PI*2});
   }
   let frame = 0;
   (function loop() {
     frame++;
     if (frame % 2 === 0) {
       cx.clearRect(0, 0, cv.width, cv.height);
+      const isLight = document.documentElement.dataset.theme === 'light';
       for (const p of pts) {
         p.x += p.vx; p.y += p.vy; p.t += .004;
         if (p.x < 0) p.x = cv.width; if (p.x > cv.width) p.x = 0;
         if (p.y < 0) p.y = cv.height; if (p.y > cv.height) p.y = 0;
         cx.beginPath();
         cx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        cx.fillStyle = 'rgba(245,179,56,' + (0.10 + 0.10 * Math.sin(p.t)) + ')';
+        const alpha = (0.10 + 0.10 * Math.sin(p.t));
+        cx.fillStyle = isLight ? 'rgba(201,138,26,' + alpha + ')' : 'rgba(245,179,56,' + alpha + ')';
         cx.fill();
       }
     }
@@ -1944,7 +1567,7 @@ function initParticles() {
   })();
 }
 
-/* ── Cursor follower (desktop) ─────────────────── */
+/* ── Cursor follower ── */
 function initCursor() {
   if (window.matchMedia('(hover:none)').matches || window.innerWidth < 900) return;
   const c = $('cursor'); if (!c) return;
@@ -1958,24 +1581,35 @@ function initCursor() {
   })();
 }
 
-/* ── Initial ticker render (skeleton) ──────────── */
-function initialTicker() {
-  const t = $('tickerTrack'); if (!t) return;
-  const items = ['XAU/USD','SIGNAL','COMPOSITE','P(ENTRY)','VIX','DXY','REAL YIELD','CPI YoY','10Y-2Y','HY SPREAD','GOLD VOL','REGIME'];
-  for (let pass = 0; pass < 2; pass++) {
-    items.forEach(label => {
-      const wrap = document.createElement('div'); wrap.className = 'tk-item';
-      const lbl = document.createElement('span'); lbl.className = 'tk-lbl'; lbl.textContent = label;
-      const val = document.createElement('span'); val.className = 'tk-val'; val.textContent = '—';
-      wrap.appendChild(lbl); wrap.appendChild(val);
-      const dot = document.createElement('span'); dot.className = 'tk-dot';
-      t.appendChild(wrap); t.appendChild(dot);
-    });
-  }
+/* ── Theme ── */
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeSet === theme);
+  });
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = theme === 'light' ? '#faf6ed' : '#0a0a0c';
+  try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+  // Re-render chart with theme-aware colors
+  if (lastDataObj && lastDataObj.history) renderChart(lastDataObj.history);
+}
+function initTheme() {
+  let saved = 'dark';
+  try { saved = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
+  applyTheme(saved);
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => applyTheme(btn.dataset.themeSet));
+  });
 }
 
-/* ── Init ─────────────────────────────────────── */
+/* ── Initial skeleton ticker ── */
+function initialTicker() {
+  renderTicker({});
+}
+
+/* ── Init ── */
 function init() {
+  initTheme();
   initParticles();
   initCursor();
   initialTicker();
@@ -1983,13 +1617,19 @@ function init() {
   const cached = loadCache();
   if (cached && cached.data) {
     lastDataTs = cached.ts;
-    render(cached.data, { animate:false });
-    const age = Date.now() - cached.ts;
-    setStatus(age > STALE_MS ? 'stale' : 'live', age > STALE_MS ? 'Stale' : 'Cached');
-    setText('updMeta', fmtTime(cached.ts));
+    const ok = render(cached.data, { animate:false });
+    if (ok) {
+      const age = Date.now() - cached.ts;
+      setStatus(age > STALE_MS ? 'stale' : 'live', age > STALE_MS ? 'Stale' : 'Cached');
+      setText('updMeta', fmtTime(cached.ts));
+    }
   } else {
-    setStatus('stale', 'Loading');
+    setStatus('fetching', 'Loading');
   }
+
+  // Manual refresh on status pill click
+  const p = $('statusPill');
+  if (p) p.addEventListener('click', () => fetchData(true));
 
   fetchData();
 
