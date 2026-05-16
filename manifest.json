@@ -1,0 +1,12 @@
+  {
+    "name": "Gold Quant Engine",
+    "short_name": "Gold Quant",
+    "description": "Personal gold allocation dashboard",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0d1117",
+    "theme_color": "#f59e0b",
+    "icons": [
+      { "src": "https://em-content.zobj.net/source/apple/354/bar-chart_1f4ca.png", "sizes": "192x192", "type": "image/png" }
+    ]
+  }
