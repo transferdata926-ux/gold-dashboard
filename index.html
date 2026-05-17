@@ -359,7 +359,13 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .chart-stat-lbl{font-size:.56rem;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:3px}
 .chart-stat-val{font-family:var(--f);font-size:.92rem;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
 .chart-stat-val.up{color:var(--green)}.chart-stat-val.dn{color:var(--red)}
-.chart-tabs{display:flex;gap:4px;padding:4px;background:var(--surface-2);border:1px solid var(--bdr);border-radius:var(--r-pill);margin-bottom:12px;width:fit-content;flex-wrap:wrap}
+.chart-tabs{display:flex;gap:4px;padding:4px;background:var(--surface-2);border:1px solid var(--bdr);border-radius:var(--r-pill);margin-bottom:10px;width:fit-content;flex-wrap:wrap}
+.chart-filters{display:flex;gap:3px;padding:3px;background:var(--surface-2);border:1px solid var(--bdr);border-radius:var(--r-pill);margin-bottom:12px;width:fit-content;flex-wrap:wrap}
+.chart-filters.hidden{display:none}
+.chart-filter{padding:5px 12px;border-radius:var(--r-pill);font-family:var(--f-mono);font-size:.62rem;font-weight:600;color:var(--text-3);letter-spacing:.10em;text-transform:uppercase;transition:all .3s var(--ease)}
+.chart-filter:hover{color:var(--text)}
+.chart-filter.active{background:linear-gradient(135deg,var(--gold-2),var(--gold-deep));color:#1a1410;box-shadow:0 0 8px var(--gold-glow)}
+:root[data-theme="light"] .chart-filter.active{color:#fffbf2}
 .chart-legend{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:.7rem;color:var(--text-3);font-family:var(--f-mono);letter-spacing:.02em;padding:6px 12px;background:var(--gold-faint);border:1px solid var(--bdr-line);border-radius:var(--r-pill);width:fit-content}
 .chart-legend.hidden{display:none}
 .chart-legend strong{color:var(--green);font-weight:600}
@@ -673,9 +679,15 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 <button class="chart-tab" data-series="prob">Probability</button>
 <button class="chart-tab" data-series="portfolio">Portfolio Growth</button>
 </div>
+<div class="chart-filters" id="chartFilters">
+<button class="chart-filter active" data-range="5d">5D</button>
+<button class="chart-filter" data-range="1m">1M</button>
+<button class="chart-filter" data-range="ytd">YTD</button>
+<button class="chart-filter" data-range="1y">1Y</button>
+</div>
 <div class="chart-legend" id="chartLegend">
 <span class="legend-dot legend-dot-buy"></span>
-<span class="legend-txt"><strong id="legendCount">—</strong> BUY signals · probability ≥ 55% on this 5d window</span>
+<span class="legend-txt"><strong id="legendCount">—</strong> BUY signals · probability ≥ 55% (only shown on Gold Spot &amp; CGL.C)</span>
 </div>
 <div class="chart-canvas">
 <canvas id="priceChart"></canvas>
@@ -742,16 +754,17 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 <script>
 (() => {
 'use strict';
-const API = 'https://script.google.com/macros/s/AKfycbwb4RKrom7w9yVnPCawOSf4EL2Bgxu0x08d1tE6s1UZy0mTjCuWVWGeFmNd--icSC9TqQ/exec';
-const CACHE_KEY = 'gqt:v9:lastData';
-const CACHE_TS_KEY = 'gqt:v9:lastTs';
-const THEME_KEY = 'gqt:v9:theme';
+const API = 'https://script.google.com/macros/s/AKfycbzoaOzOYTjpKxD3uCrCEQsuZYf0LVYJS4SuNK55JCs8NbW1LcxeDmFHUxnsBQYYhWtfGg/exec';
+const CACHE_KEY = 'gqt:v10:lastData';
+const CACHE_TS_KEY = 'gqt:v10:lastTs';
+const THEME_KEY = 'gqt:v10:theme';
 const REFRESH_MS = 5 * 60 * 1000;
 const STALE_MS = 10 * 60 * 1000;
 const TIMEOUT_MS = 55000;
 
 let chartInst = null, isFetching = false, backoff = 0, lastDataTs = 0, lastDataObj = null, retryTimer = null;
 let activeSeries = 'spot';
+let activeRange = '5d';  // 5d | 1m | ytd | 1y — filter for spot/cgl/prob charts
 
 const $ = id => document.getElementById(id);
 const setText = (id, val) => { const el = $(id); if (el) el.textContent = val; };
@@ -1137,64 +1150,81 @@ function renderConfidenceStrip(d) {
   }
 }
 
+// Range labels & subtitles
+const RANGE_META = {
+  '5d':  { sub: '30-minute bars · last 5 trading days', dateFmt: 'short-time' },
+  '1m':  { sub: 'Daily bars · last 30 days',            dateFmt: 'short' },
+  'ytd': { sub: 'Daily bars · year-to-date',            dateFmt: 'medium' },
+  '1y':  { sub: 'Daily bars · trailing 365 days',       dateFmt: 'medium' }
+};
+
+// Resolve range-keyed data structure (handles legacy flat-array shape too)
+function pickRange(obj, range) {
+  if (!obj) return [];
+  if (Array.isArray(obj)) return obj;  // legacy flat
+  return obj[range] || [];
+}
+
 function renderChart() {
   const ctx = $('priceChart'), emptyEl = $('chartEmpty');
   if (!ctx || typeof Chart === 'undefined') return;
   const d = lastDataObj || {};
   const charts = d.charts || {};
+  const meta = RANGE_META[activeRange] || RANGE_META['5d'];
   let dataset, label, prefix='$', suffix='';
+  let signalsForRange = null;
+
+  // Show/hide filter & legend based on tab
+  const filterEl = $('chartFilters');
+  const legendEl = $('chartLegend');
+  const showFilter = activeSeries !== 'portfolio';
+  if (filterEl) filterEl.classList.toggle('hidden', !showFilter);
+
   if (activeSeries === 'spot') {
-    dataset = charts.spot || [];
+    dataset = pickRange(charts.spot, activeRange);
+    signalsForRange = pickRange(charts.spotSignals, activeRange);
     setText('chartTitle','Gold Spot · USD per Troy Ounce');
-    setText('chartSub','30-minute · last 5 days · COMEX GC=F');
+    setText('chartSub', meta.sub + ' · COMEX GC=F');
     label='Gold USD';
   } else if (activeSeries === 'cgl') {
-    dataset = charts.cgl || [];
+    dataset = pickRange(charts.cgl, activeRange);
+    signalsForRange = pickRange(charts.cglSignals, activeRange);
     setText('chartTitle','CGL.C · iShares Gold Bullion ETF');
-    setText('chartSub','30-minute · last 5 days · TSX CGL.TO');
+    setText('chartSub', meta.sub + ' · TSX CGL.TO');
     label='CGL.C CAD';
   } else if (activeSeries === 'prob') {
-    dataset = charts.prob || [];
+    dataset = pickRange(charts.prob, activeRange);
+    // NO BUY-signal overlay on probability chart (per user request)
+    signalsForRange = null;
     setText('chartTitle','Entry Probability · Backtest Simulation');
-    setText('chartSub','Dense 30m × 5d — Bayesian engine replayed on each historical bar');
+    setText('chartSub', meta.sub + ' · Bayesian engine replayed on each bar');
     label='P(Entry) %';
     prefix=''; suffix='%';
   } else {
-    // Portfolio Growth — value over time
+    // Portfolio Growth — single timeline, no range filter, no BUY signals
     const port = charts.portfolio || [];
     if (port.length > 0) {
-      // Map timeline {t, invested, value, pl} into chart data
       dataset = port.map(p => ({ t: p.t, p: p.value || 0 }));
       setText('chartTitle','Portfolio Growth · CGL.C');
       setText('chartSub', port.length + ' trades · cumulative value over time');
     } else {
-      // No trades yet — show flat zero placeholder for visual context
       const now = Date.now();
-      dataset = [
-        { t: now - 7*86400000, p: 0 },
-        { t: now - 6*86400000, p: 0 },
-        { t: now - 5*86400000, p: 0 },
-        { t: now - 4*86400000, p: 0 },
-        { t: now - 3*86400000, p: 0 },
-        { t: now - 2*86400000, p: 0 },
-        { t: now - 86400000, p: 0 },
-        { t: now, p: 0 }
-      ];
+      dataset = [];
+      for (let i = 7; i >= 0; i--) dataset.push({ t: now - i*86400000, p: 0 });
       setText('chartTitle','Portfolio Growth · CGL.C');
       setText('chartSub','No trades logged yet — log your first buy below to start tracking');
     }
     label='Portfolio Value CAD';
   }
 
-  // Update BUY-signal legend: count varies per tab
-  const legendEl = $('chartLegend');
+  // Update legend: only on spot/cgl tabs
   if (legendEl) {
-    let sigCount = 0;
-    if (activeSeries === 'spot')      sigCount = (charts.spotSignals || []).length;
-    else if (activeSeries === 'cgl')  sigCount = (charts.cglSignals || []).length;
-    else if (activeSeries === 'prob') sigCount = (charts.prob || []).filter(p => p.p >= 55).length;
-    if (activeSeries === 'portfolio') legendEl.classList.add('hidden');
-    else { legendEl.classList.remove('hidden'); setText('legendCount', String(sigCount)); }
+    if (activeSeries === 'spot' || activeSeries === 'cgl') {
+      legendEl.classList.remove('hidden');
+      setText('legendCount', String((signalsForRange || []).length));
+    } else {
+      legendEl.classList.add('hidden');
+    }
   }
 
   if (!dataset || !dataset.length) {
@@ -1206,9 +1236,16 @@ function renderChart() {
   if (emptyEl) emptyEl.classList.remove('show');
 
   const values = dataset.map(x => x.p);
+  // Date format adapts to the selected range
+  const dateFmt = meta.dateFmt;
   const labels = dataset.map(x => {
     const dt = new Date(x.t);
-    return dt.toLocaleDateString('en-CA',{month:'short',day:'numeric'}) + ' ' + dt.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit',hour12:false});
+    if (dateFmt === 'short-time') {
+      return dt.toLocaleDateString('en-CA',{month:'short',day:'numeric'}) + ' ' + dt.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit',hour12:false});
+    } else if (dateFmt === 'medium') {
+      return dt.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'2-digit'});
+    }
+    return dt.toLocaleDateString('en-CA',{month:'short',day:'numeric'});
   });
 
   const hi = Math.max.apply(null,values), lo = Math.min.apply(null,values);
@@ -1225,26 +1262,18 @@ function renderChart() {
   if (chartInst) { chartInst.destroy(); chartInst = null; }
   const isLight = document.documentElement.dataset.theme === 'light';
 
-  // BUY-signal overlay: build aligned data array of price/prob points where signal fired
-  // Spot chart → charts.spotSignals · CGL chart → charts.cglSignals
-  // Prob chart → signal = points >= 55% (built inline from dataset)
+  // BUY-signal overlay: ONLY on Gold Spot + CGL.C ETF (per user spec).
+  // No overlay on Probability or Portfolio Growth tabs.
   let signalData = null;
   let signalProbs = {};  // map timestamp → prob % for tooltip
-  if (activeSeries === 'spot' || activeSeries === 'cgl') {
-    const sigKey = activeSeries === 'spot' ? 'spotSignals' : 'cglSignals';
-    const sigs = charts[sigKey] || [];
-    if (sigs.length) {
-      const sigMap = {};
-      sigs.forEach(s => { sigMap[s.t] = s; });
-      signalData = dataset.map(pt => {
-        const s = sigMap[pt.t];
-        if (s) { signalProbs[pt.t] = s.prob; return pt.p; }
-        return null;
-      });
-    }
-  } else if (activeSeries === 'prob') {
-    // Overlay green dots where probability ≥ 55% (deployment threshold)
-    signalData = dataset.map(pt => pt.p >= 55 ? pt.p : null);
+  if ((activeSeries === 'spot' || activeSeries === 'cgl') && signalsForRange && signalsForRange.length) {
+    const sigMap = {};
+    signalsForRange.forEach(s => { sigMap[s.t] = s; });
+    signalData = dataset.map(pt => {
+      const s = sigMap[pt.t];
+      if (s) { signalProbs[pt.t] = s.prob; return pt.p; }
+      return null;
+    });
   }
 
   const datasets = [{
@@ -1510,6 +1539,16 @@ function initChartTabs() {
     });
   });
 }
+function initChartFilters() {
+  document.querySelectorAll('.chart-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.chart-filter').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeRange = btn.dataset.range;
+      renderChart();
+    });
+  });
+}
 
 function init() {
   initTheme();
@@ -1518,6 +1557,7 @@ function init() {
   renderTicker({});
   renderNews(null);
   initChartTabs();
+  initChartFilters();
   initTradeForm();
 
   const cached = loadCache();
