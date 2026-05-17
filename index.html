@@ -302,6 +302,26 @@ canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5
 .cap-note strong{color:var(--gold-2);font-weight:500}
 :root[data-theme="light"] .cap-note strong{color:var(--gold)}
 @media(max-width:860px){.capital-card{padding:24px}.cap-grid{grid-template-columns:1fr;gap:14px}.cap-stat-val{font-size:1.3rem}}
+
+/* CONFIDENCE/ACTION/BACKTEST STRIP */
+.confidence-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.cs-card{padding:22px 24px;position:relative;overflow:hidden}
+.cs-lbl{font-size:.58rem;font-weight:600;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.cs-val{font-family:var(--f);font-size:1.9rem;font-weight:600;letter-spacing:-.03em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;margin-bottom:8px}
+.cs-val.gold{background:linear-gradient(135deg,var(--gold-3),var(--gold-2) 50%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cs-val.green{color:var(--green)}
+.cs-val.red{color:var(--red)}
+.cs-val.muted{color:var(--text-2);font-size:1.4rem}
+.cs-bar{position:relative;height:6px;border-radius:4px;background:rgba(245,235,214,.04);overflow:hidden;margin-bottom:10px}
+:root[data-theme="light"] .cs-bar{background:rgba(26,20,16,.06)}
+.cs-bar-fill{height:100%;border-radius:4px;width:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold-2));transition:width 1.5s var(--ease);box-shadow:0 0 10px var(--gold-glow)}
+.cs-sub{font-size:.66rem;color:var(--text-3);line-height:1.5}
+.cs-tier{display:inline-block;font-size:.6rem;font-weight:600;color:var(--gold-2);letter-spacing:.10em;text-transform:uppercase;padding:3px 9px;background:var(--gold-soft);border:1px solid var(--bdr-2);border-radius:var(--r-pill);margin-bottom:8px;font-family:var(--f-mono)}
+:root[data-theme="light"] .cs-tier{color:var(--gold)}
+.cs-metrics{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.cs-metric{font-size:.6rem;color:var(--text-3);font-family:var(--f-mono)}
+.cs-metric strong{color:var(--text-2);font-weight:600}
+@media(max-width:860px){.confidence-strip{grid-template-columns:1fr;gap:10px}.cs-card{padding:18px 20px}.cs-val{font-size:1.5rem}}
 .reasoning{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
 .rc{padding:24px 26px;background:linear-gradient(135deg,rgba(245,235,214,.02),transparent),var(--surface);border:1px solid var(--bdr);border-radius:var(--r-md);transition:all .4s var(--ease);backdrop-filter:blur(12px);position:relative;overflow:hidden}
 :root[data-theme="light"] .rc{background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.3)),var(--surface)}
@@ -528,9 +548,31 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 </div>
 
 <div class="card probcard fi d4">
-<div class="prob-head"><span class="prob-title">Probability Spectrum · Live Conviction</span><span class="prob-val" id="probVal">—</span></div>
+<div class="prob-head"><span class="prob-title">Probability Spectrum · Bayesian Update</span><span class="prob-val" id="probVal">—</span></div>
 <div class="prob-track"><div class="prob-fill" id="probFill"></div></div>
-<div class="prob-marks"><span>WAIT &lt;35%</span><span>HOLD 35-50%</span><span>BUY &gt;50%</span><span>STRONG &gt;65%</span></div>
+<div class="prob-marks"><span>WAIT &lt;55%</span><span>SMALL 55-70%</span><span>MODERATE 70-85%</span><span>AGGRESSIVE &gt;85%</span></div>
+</div>
+
+<!-- CONFIDENCE + BACKTEST + ACTION CARD -->
+<div class="confidence-strip fi d4">
+<div class="card cs-card">
+<div class="cs-lbl">Confidence Score</div>
+<div class="cs-val gold" id="csConfidence">—</div>
+<div class="cs-bar"><div class="cs-bar-fill" id="csConfidenceBar"></div></div>
+<div class="cs-sub" id="csConfidenceDesc">Indicator agreement strength</div>
+</div>
+<div class="card cs-card">
+<div class="cs-lbl">Recommended Action</div>
+<div class="cs-val" id="csAction">—</div>
+<div class="cs-tier" id="csTier">Tier: —</div>
+<div class="cs-sub" id="csActionDesc">Awaiting engine recommendation…</div>
+</div>
+<div class="card cs-card">
+<div class="cs-lbl">Backtest Accuracy</div>
+<div class="cs-val" id="csAccuracy">—</div>
+<div class="cs-sub" id="csAccuracyDesc">Hit rate on last 5d intraday · validates probability quality</div>
+<div class="cs-metrics" id="csMetrics"></div>
+</div>
 </div>
 
 <div class="gauges fi d4">
@@ -562,16 +604,16 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 <div class="reg-mult"><span class="l">Multiplier</span><span id="regMult">— ×</span></div>
 </div>
 
-<section class="sec fi d7"><span class="sec-num">04</span><h2 class="sec-title">Portfolio Engine</h2><div class="sec-line"></div><span class="sec-tag">PhD Pacing · Half-Kelly</span></section>
+<section class="sec fi d7"><span class="sec-num">04</span><h2 class="sec-title">Portfolio Engine</h2><div class="sec-line"></div><span class="sec-tag">Bayesian · Tiered Deployment</span></section>
 <div class="portfolio fi d7">
 <div class="card port-card deploy">
 <div class="port-lbl"><span class="eng-lbl-dot"></span>Deploy CGL.C This Cycle</div>
 <div class="port-val" id="portDeploy">$—</div>
 <div class="port-val-sub" id="portDeploySub">— · capital-aware sizing</div>
 <div class="port-pace" id="portPace">Capped by: —</div>
-<p class="port-cta">Sized against your <strong>$2000 CAD annual budget</strong> with PhD-level pacing logic — engine reserves dry powder for future dips and never burns more than 3× even-monthly pace, even on STRONG_BUY.</p>
+<p class="port-cta"><strong>$500 CAD available</strong> right now, scaled around <strong>$250/mo</strong> default contribution. Engine deploys ONLY when probability ≥ 55%. No edge → preserve cash. Strong edge + deep dip → up to 100% of monthly target.</p>
 <div class="port-bar-wrap"><div class="port-bar"><div class="port-bar-fill" id="portBar"></div></div></div>
-<div class="port-stats"><span>$0</span><span id="portStatMid">$25</span><span id="portStatMax">$50 mo cap</span></div>
+<div class="port-stats"><span>$0</span><span id="portStatMid">$125</span><span id="portStatMax">$250 monthly target</span></div>
 </div>
 <div class="card port-card port-return">
 <div class="port-lbl"><span class="eng-lbl-dot"></span>Risk &amp; Returns</div>
@@ -624,6 +666,7 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 <button class="chart-tab active" data-series="spot">Gold Spot</button>
 <button class="chart-tab" data-series="cgl">CGL.C ETF</button>
 <button class="chart-tab" data-series="prob">Probability</button>
+<button class="chart-tab" data-series="portfolio">Portfolio Growth</button>
 </div>
 <div class="chart-canvas">
 <canvas id="priceChart"></canvas>
@@ -690,10 +733,10 @@ footer::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1
 <script>
 (() => {
 'use strict';
-const API = 'https://script.google.com/macros/s/AKfycbzJxsI1SgVHPjCwdb-CrSnDWHuFbIkQctnyM8OultIu9h9zyanQf0Dy4UFgt8BUiZhxuQ/exec';
-const CACHE_KEY = 'gqt:v7:lastData';
-const CACHE_TS_KEY = 'gqt:v7:lastTs';
-const THEME_KEY = 'gqt:v7:theme';
+const API = 'https://script.google.com/macros/s/AKfycbz0KxLrtWN5i8ep9A9QchlB4xzeT6TB-SewONK4MRY7Re2okDsOR46r1S-h9Bz6vTaaDQ/exec';
+const CACHE_KEY = 'gqt:v8:lastData';
+const CACHE_TS_KEY = 'gqt:v8:lastTs';
+const THEME_KEY = 'gqt:v8:theme';
 const REFRESH_MS = 5 * 60 * 1000;
 const STALE_MS = 10 * 60 * 1000;
 const TIMEOUT_MS = 55000;
@@ -926,8 +969,19 @@ function render(d, opts) {
   setText('heroComp', ((d.composite||0)*100).toFixed(1)+'%');
   setText('heroReg', (d.regime||'—').replace(/_/g,' '));
 
-  styleEngineSignal(d.signal);
-  setText('engineDesc', SIG_DESC[d.signal] || 'Monitoring...');
+  // Use new deployment.tier for richer engine signal, fall back to legacy signal
+  const dep1 = d.deployment || {};
+  const engineLabel = dep1.tier === 'AGGRESSIVE' ? 'AGGRESSIVE BUY'
+                    : dep1.tier === 'MODERATE' ? 'BUY'
+                    : dep1.tier === 'SMALL' ? 'SMALL BUY'
+                    : (d.signal || 'WAIT');
+  styleEngineSignal(engineLabel === 'AGGRESSIVE BUY' || engineLabel === 'SMALL BUY' ? 'BUY' : engineLabel);
+  const engineEl = $('engineSignal');
+  if (engineEl) engineEl.textContent = engineLabel;
+  setText('engineDesc',
+    dep1.tier === 'NONE' || (dep1.amount||0) < 25
+      ? 'No deployment — probability ' + ((d.probability||0)*100).toFixed(0) + '% below 55% statistical-edge floor. Preserve cash and wait for a better setup.'
+      : 'Deploy $' + (dep1.amount||0) + ' CAD into CGL.C. Tier ' + dep1.tier + '. ' + (dep1.reason || ''));
   setText('probRingSub', SIG_SUB[d.signal] || 'Bayesian Confidence');
 
   const prob = d.pEntry || 0;
@@ -997,15 +1051,81 @@ function render(d, opts) {
   updateTradePreview();
 
   const zs = d.zScore || 0;
-  setText('rSig','Entry probability '+prob.toFixed(1)+'% via Bayesian sigmoid on '+cs.toFixed(1)+'% composite. '+(prob>=65?'All systems aligned.':prob>=50?'Standard BUY met.':prob>=35?'Mixed — DCA only.':'Hold cash, wait.'));
-  setText('rMac','Regime: '+reg.replace(/_/g,' ')+'. Real yield '+ry.toFixed(2)+'% '+(ry<0?'(bullish)':'(headwind)')+'. CPI '+cpi.toFixed(1)+'%. DXY '+dxy.toFixed(1)+'. VIX '+vix.toFixed(1)+'.');
-  setText('rTec','RSI '+rsiVal.toFixed(1)+' '+(rsiVal<40?'(oversold)':rsiVal>70?'(overbought)':'(neutral)')+'. Z-score: '+zs.toFixed(2)+'σ. '+(Math.abs(zs)>2?'Mean reversion likely.':'Near average.'));
-  setText('rRis','Half-Kelly · vol-scaled · drawdown-bonus · regime '+(ri.mult||'—')+'. Pacing reserves capital for '+(pacing.monthsLeft||'—')+' more months. Max burn: $'+Math.round(pacing.maxBurnAllowed||0)+' (current cap: '+(pacing.cappedBy||'—')+'). Available: $'+available+'/$'+budget+'.');
+  const dep2 = d.deployment || {};
+  const conf2 = d.confidence != null ? d.confidence : 0;
+  const reasons = (dep2.topReasons && dep2.topReasons.length) ? dep2.topReasons.slice(0,3).join(' · ') : 'no strong bullish signals';
+  const concerns = (dep2.topConcerns && dep2.topConcerns.length) ? dep2.topConcerns.slice(0,3).join(' · ') : 'no major bearish signals';
+  setText('rSig','Probability '+prob.toFixed(1)+'% via Bayesian update across 10 indicators. Confidence '+(conf2*100).toFixed(0)+'%. ' + (prob>=85?'AGGRESSIVE tier — deploy 50-100% of monthly target.':prob>=70?'MODERATE tier — deploy 25-50%.':prob>=55?'SMALL tier — deploy 10-25%.':'Below 55% floor — preserve cash, wait for edge.'));
+  setText('rMac','Regime: '+reg.replace(/_/g,' ')+' (mult '+(ri.mult||'1.0')+'). Real yield '+ry.toFixed(2)+'% '+(ry<0?'(bullish gold)':'(headwind)')+'. CPI '+cpi.toFixed(1)+'%. DXY '+dxy.toFixed(1)+'. VIX '+vix.toFixed(1)+'. ' + (dep2.topReasons && dep2.topReasons.length ? 'Bullish: '+reasons : ''));
+  setText('rTec','RSI '+rsiVal.toFixed(1)+' '+(rsiVal<40?'(oversold)':rsiVal>70?'(overbought)':'(neutral)')+'. Z-score '+zs.toFixed(2)+'σ. Momentum '+(d.momentum||0).toFixed(2)+'%. Drawdown '+dd.toFixed(1)+'%. ' + (dep2.topConcerns && dep2.topConcerns.length ? 'Bearish drag: '+concerns : ''));
+  setText('rRis','Action: *'+(dep2.action||'WAIT')+'* · Tier: '+(dep2.tier||'NONE')+' · Amount: $'+(dep2.amount||0)+' CAD. Confidence adj: '+((dep2.adjustments&&dep2.adjustments.confidenceAdj)||1).toFixed(2)+'× · Regime adj: '+((dep2.adjustments&&dep2.adjustments.regimeAdj)||1).toFixed(2)+'× · DD bonus: '+((dep2.adjustments&&dep2.adjustments.drawdownBonus)||1).toFixed(2)+'×. Available: $'+available+' of $'+budget+' annual budget.');
+
+  // CONFIDENCE + ACTION + BACKTEST PANEL
+  renderConfidenceStrip(d);
 
   renderChart();
   renderNews(d.news);
   renderTicker(d);
   return true;
+}
+
+// Confidence / Action / Backtest panel
+function renderConfidenceStrip(d) {
+  const conf = d.confidence != null ? d.confidence : 0;
+  const dep = d.deployment || {};
+  const bt = d.backtest;
+
+  // Confidence card
+  setText('csConfidence', (conf * 100).toFixed(0) + '%');
+  setBar('csConfidenceBar', conf * 100);
+  const cDesc = conf >= 0.80 ? 'Strong consensus — indicators aligned'
+              : conf >= 0.60 ? 'Moderate agreement'
+              : conf >= 0.40 ? 'Mixed signals — caution'
+              : 'Weak / conflicting — uncertain';
+  setText('csConfidenceDesc', cDesc);
+
+  // Action card
+  const actEl = $('csAction');
+  const tier = dep.tier || 'NONE';
+  const amt = dep.amount || 0;
+  if (actEl) {
+    actEl.className = 'cs-val';
+    if (tier === 'NONE' || amt < 25) {
+      actEl.textContent = 'Preserve Cash';
+      actEl.classList.add('muted');
+      setText('csActionDesc', 'No deployment — insufficient statistical edge');
+    } else {
+      actEl.textContent = '$' + amt + ' CAD';
+      actEl.classList.add('green');
+      setText('csActionDesc', 'Deploy to CGL.C now — edge confirmed');
+    }
+  }
+  setText('csTier', 'Tier: ' + tier);
+
+  // Backtest card
+  if (bt && bt.samples > 5) {
+    const acc = (bt.accuracy * 100).toFixed(0);
+    setText('csAccuracy', acc + '%');
+    setText('csAccuracyDesc', bt.samples + ' samples on last 5d intraday · validates probability quality');
+    const m = $('csMetrics');
+    if (m) {
+      while (m.firstChild) m.removeChild(m.firstChild);
+      const mk = (lbl, val) => {
+        const sp = document.createElement('span'); sp.className = 'cs-metric';
+        const st = document.createElement('strong'); st.textContent = val;
+        sp.appendChild(document.createTextNode(lbl + ' ')); sp.appendChild(st);
+        return sp;
+      };
+      m.appendChild(mk('BUY hit:', (bt.buyHitRate*100).toFixed(0)+'%'));
+      m.appendChild(mk('WAIT hit:', (bt.waitHitRate*100).toFixed(0)+'%'));
+      m.appendChild(mk('FP:', String(bt.falsePositive||0)));
+      m.appendChild(mk('FN:', String(bt.falseNegative||0)));
+    }
+  } else {
+    setText('csAccuracy', '—');
+    setText('csAccuracyDesc', 'Awaiting intraday data — backtest engages once enough 30m bars exist');
+    const m = $('csMetrics'); if (m) while (m.firstChild) m.removeChild(m.firstChild);
+  }
 }
 
 function renderChart() {
@@ -1024,12 +1144,37 @@ function renderChart() {
     setText('chartTitle','CGL.C · iShares Gold Bullion ETF');
     setText('chartSub','30-minute · last 5 days · TSX CGL.TO');
     label='CGL.C CAD';
-  } else {
+  } else if (activeSeries === 'prob') {
     dataset = charts.prob || [];
     setText('chartTitle','Entry Probability · Engine History');
     setText('chartSub','P(entry) % timeline from each engine run');
     label='P(Entry) %';
     prefix=''; suffix='%';
+  } else {
+    // Portfolio Growth — value over time
+    const port = charts.portfolio || [];
+    if (port.length > 0) {
+      // Map timeline {t, invested, value, pl} into chart data
+      dataset = port.map(p => ({ t: p.t, p: p.value || 0 }));
+      setText('chartTitle','Portfolio Growth · CGL.C');
+      setText('chartSub', port.length + ' trades · cumulative value over time');
+    } else {
+      // No trades yet — show flat zero placeholder for visual context
+      const now = Date.now();
+      dataset = [
+        { t: now - 7*86400000, p: 0 },
+        { t: now - 6*86400000, p: 0 },
+        { t: now - 5*86400000, p: 0 },
+        { t: now - 4*86400000, p: 0 },
+        { t: now - 3*86400000, p: 0 },
+        { t: now - 2*86400000, p: 0 },
+        { t: now - 86400000, p: 0 },
+        { t: now, p: 0 }
+      ];
+      setText('chartTitle','Portfolio Growth · CGL.C');
+      setText('chartSub','No trades logged yet — log your first buy below to start tracking');
+    }
+    label='Portfolio Value CAD';
   }
 
   if (!dataset || !dataset.length) {
